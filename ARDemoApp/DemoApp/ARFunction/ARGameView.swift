@@ -66,8 +66,7 @@ public class ARGameView: ARSCNView {
         _engine.clearScene()
     }
     
-    
-    
-    
 }
+
+extension ARGameView: ARSmartHitTest { }
 

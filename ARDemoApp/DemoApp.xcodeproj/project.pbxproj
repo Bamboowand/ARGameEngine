@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F6A214C246FA53C00AAD6B6 /* float4x4+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A2146246FA53C00AAD6B6 /* float4x4+Extension.swift */; };
+		1F6A214D246FA53C00AAD6B6 /* ARSCNView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A2147246FA53C00AAD6B6 /* ARSCNView+Extension.swift */; };
+		1F6A214E246FA53C00AAD6B6 /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A2148246FA53C00AAD6B6 /* FocusSquare.swift */; };
+		1F6A214F246FA53C00AAD6B6 /* FocusSquare+Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A2149246FA53C00AAD6B6 /* FocusSquare+Segment.swift */; };
+		1F6A2150246FA53C00AAD6B6 /* FocusPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A214A246FA53C00AAD6B6 /* FocusPlane.swift */; };
+		1F6A2151246FA53C00AAD6B6 /* FocusNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A214B246FA53C00AAD6B6 /* FocusNode.swift */; };
 		1FD60061246D96A900AF0D4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD60060246D96A900AF0D4B /* AppDelegate.swift */; };
 		1FD60063246D96A900AF0D4B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD60062246D96A900AF0D4B /* SceneDelegate.swift */; };
 		1FD60065246D96A900AF0D4B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD60064246D96A900AF0D4B /* ViewController.swift */; };
@@ -39,6 +45,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F6A2146246FA53C00AAD6B6 /* float4x4+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "float4x4+Extension.swift"; sourceTree = "<group>"; };
+		1F6A2147246FA53C00AAD6B6 /* ARSCNView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ARSCNView+Extension.swift"; sourceTree = "<group>"; };
+		1F6A2148246FA53C00AAD6B6 /* FocusSquare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
+		1F6A2149246FA53C00AAD6B6 /* FocusSquare+Segment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FocusSquare+Segment.swift"; sourceTree = "<group>"; };
+		1F6A214A246FA53C00AAD6B6 /* FocusPlane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusPlane.swift; sourceTree = "<group>"; };
+		1F6A214B246FA53C00AAD6B6 /* FocusNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusNode.swift; sourceTree = "<group>"; };
 		1FD6005D246D96A900AF0D4B /* DemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FD60060246D96A900AF0D4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FD60062246D96A900AF0D4B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +94,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F6A2145246FA53C00AAD6B6 /* FocusNode */ = {
+			isa = PBXGroup;
+			children = (
+				1F6A2146246FA53C00AAD6B6 /* float4x4+Extension.swift */,
+				1F6A2147246FA53C00AAD6B6 /* ARSCNView+Extension.swift */,
+				1F6A2148246FA53C00AAD6B6 /* FocusSquare.swift */,
+				1F6A2149246FA53C00AAD6B6 /* FocusSquare+Segment.swift */,
+				1F6A214A246FA53C00AAD6B6 /* FocusPlane.swift */,
+				1F6A214B246FA53C00AAD6B6 /* FocusNode.swift */,
+			);
+			path = FocusNode;
+			sourceTree = "<group>";
+		};
 		1FD60054246D96A900AF0D4B = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +177,7 @@
 		1FD6008F246E355F00AF0D4B /* ARFunction */ = {
 			isa = PBXGroup;
 			children = (
+				1F6A2145246FA53C00AAD6B6 /* FocusNode */,
 				1FD60098246E41BA00AF0D4B /* Workers */,
 				1FD6007B246D9B4E00AF0D4B /* BaseEntity */,
 				1FD60074246D973700AF0D4B /* ARGameView.swift */,
@@ -306,7 +332,11 @@
 				1FD60065246D96A900AF0D4B /* ViewController.swift in Sources */,
 				1FD60061246D96A900AF0D4B /* AppDelegate.swift in Sources */,
 				1FD600A3246E9AE800AF0D4B /* Downloader.swift in Sources */,
+				1F6A214F246FA53C00AAD6B6 /* FocusSquare+Segment.swift in Sources */,
+				1F6A2151246FA53C00AAD6B6 /* FocusNode.swift in Sources */,
 				1FD6009C246E77F100AF0D4B /* ARGameEngine.swift in Sources */,
+				1F6A2150246FA53C00AAD6B6 /* FocusPlane.swift in Sources */,
+				1F6A214E246FA53C00AAD6B6 /* FocusSquare.swift in Sources */,
 				1FD6009F246E7AE600AF0D4B /* ARGameEngine+ARSessionDelegate.swift in Sources */,
 				1FD60063246D96A900AF0D4B /* SceneDelegate.swift in Sources */,
 				1FD600A1246E7AF600AF0D4B /* ARGameEngine+ARSCNViewDelegate.swift in Sources */,
@@ -315,6 +345,8 @@
 				1FD60079246D9A3C00AF0D4B /* HasModelTrackedRaycast.swift in Sources */,
 				1FD60075246D973700AF0D4B /* ARGameView.swift in Sources */,
 				1FD60077246D97D600AF0D4B /* VirtualModelEntity.swift in Sources */,
+				1F6A214D246FA53C00AAD6B6 /* ARSCNView+Extension.swift in Sources */,
+				1F6A214C246FA53C00AAD6B6 /* float4x4+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

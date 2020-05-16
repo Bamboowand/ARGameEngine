@@ -32,6 +32,7 @@ class ViewController: UIViewController {
         
         arView.run()
         viewInteraction.selectedNode = nil
+
     }
     
     override func viewDidDisappear(_ animated: Bool) {

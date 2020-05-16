@@ -12,8 +12,13 @@ import SceneKit
 import ARKit
 
 class ARGameEngine: NSObject {
-    
-    weak var view: ARSCNView? = nil
+    public let focusNode = FocusSquare()
+    weak var view: ARGameView? {
+        didSet {
+            self.focusNode.viewDelegate = view
+            self.scene?.rootNode.addChildNode(self.focusNode)
+        }
+    }
     weak var scene: SCNScene? = nil
     weak var arSession: ARSession? = nil
     // MARK: - Property storge

@@ -10,6 +10,11 @@ import ARKit
 import SceneKit
 
 extension ARGameEngine: ARSCNViewDelegate {
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        self.focusNode.updateFocusNode()
+    }
+    
+    // MARK: - 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         
     }
