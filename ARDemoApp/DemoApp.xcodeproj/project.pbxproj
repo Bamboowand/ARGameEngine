@@ -177,7 +177,6 @@
 		1FD6008F246E355F00AF0D4B /* ARFunction */ = {
 			isa = PBXGroup;
 			children = (
-				1F6A2145246FA53C00AAD6B6 /* FocusNode */,
 				1FD60098246E41BA00AF0D4B /* Workers */,
 				1FD6007B246D9B4E00AF0D4B /* BaseEntity */,
 				1FD60074246D973700AF0D4B /* ARGameView.swift */,
@@ -210,6 +209,7 @@
 		1FD60098246E41BA00AF0D4B /* Workers */ = {
 			isa = PBXGroup;
 			children = (
+				1F6A2145246FA53C00AAD6B6 /* FocusNode */,
 				1FD60099246E6BA200AF0D4B /* ViewInteraction.swift */,
 			);
 			path = Workers;
