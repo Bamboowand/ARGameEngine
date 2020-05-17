@@ -8,9 +8,12 @@
 import ARKit
 
 struct TrackedRaycastProperty {
+    var allowedAlignment: ARRaycastQuery.TargetAlignment = .any
+    var shouldUpdateAnchor: Bool = false
     var anchor: ARAnchor? = nil
     var raycastQueue: ARRaycastQuery? = nil
     var raycast: ARTrackedRaycast? = nil
+    var mostRecentInitialPlacementResult: ARRaycastResult? = nil
 }
 
 protocol HasModelTrackedRaycast: AnyObject {
@@ -19,6 +22,24 @@ protocol HasModelTrackedRaycast: AnyObject {
 }
 
 extension HasModelTrackedRaycast {
+    var allowedAlignment: ARRaycastQuery.TargetAlignment {
+        get {
+            return trackedRaycastProperty.allowedAlignment
+        }
+        set {
+            trackedRaycastProperty.allowedAlignment = newValue
+        }
+    }
+    
+    var shouldUpdateAnchor: Bool {
+        get {
+            return trackedRaycastProperty.shouldUpdateAnchor
+        }
+        set {
+            trackedRaycastProperty.shouldUpdateAnchor = newValue
+        }
+    }
+    
     var anchor: ARAnchor? {
         get {
             return trackedRaycastProperty.anchor
@@ -43,6 +64,15 @@ extension HasModelTrackedRaycast {
         }
         set {
             trackedRaycastProperty.raycast = newValue
+        }
+    }
+    
+    var mostRecentInitialPlacementResult: ARRaycastResult? {
+        get {
+            return trackedRaycastProperty.mostRecentInitialPlacementResult
+        }
+        set {
+            trackedRaycastProperty.mostRecentInitialPlacementResult = newValue
         }
     }
     

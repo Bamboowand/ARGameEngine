@@ -13,6 +13,10 @@ import SceneKit
 public class ARGameView: ARSCNView {
     private let _engine: ARGameEngine = ARGameEngine.shared
     
+    var screenCenter: CGPoint {
+        return CGPoint(x: bounds.midX, y: bounds.midY)
+    }
+    
     // MARK: - Singleton methods
     private lazy var configuation: ARWorldTrackingConfiguration = {
         let config = ARWorldTrackingConfiguration()
@@ -58,9 +62,13 @@ public class ARGameView: ARSCNView {
     }
     
     // MARK: Scene controller
-    public func addModelEntity(_ model: VirtualModelEntity) {
-        _engine.placeModel(model)
+    public func placeModel(_ model: VirtualModelEntity, point: CGPoint? = nil) {
+        _engine.placeModel(model, point: point)
     }
+    
+//    public func addModelEntity(_ model: VirtualModelEntity) {
+//        _engine.placeModel(model)
+//    }
     
     public func clearScene() {
         _engine.clearScene()

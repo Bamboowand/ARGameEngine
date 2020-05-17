@@ -31,7 +31,7 @@ class ViewController: UIViewController {
         
         
         arView.run()
-        viewInteraction.selectedNode = nil
+        viewInteraction.selectedEntity = nil
 
     }
     
@@ -57,17 +57,14 @@ class ViewController: UIViewController {
         
     @IBAction func addObjectAction(_ sender: Any) {
 
-        guard let result = self.arView.hitTest(CGPoint(x: UIScreen.main.bounds.width / 2.0,
-                                                       y: UIScreen.main.bounds.height / 2.0),
-                                               types: .existingPlane).first,
-        currentEntity != nil
-        else {
+        if currentEntity == nil {
             return
         }
-        viewInteraction.selectedNode = currentEntity!.referenceNode
-        currentEntity!.referenceNode.simdWorldTransform = result.worldTransform
+        
+        viewInteraction.selectedEntity = currentEntity!
+//        currentEntity!.referenceNode.simdWorldTransform = result.worldTransform
         currentEntity!.referenceNode.scale = SCNVector3(0.001, 0.001, 0.001)
-        self.arView.addModelEntity(currentEntity!)
+        self.arView.placeModel(currentEntity!)
     }
     
     @IBAction func clearAction(_ sender: Any) {
@@ -98,7 +95,7 @@ extension ViewController: QLPreviewControllerDelegate, QLPreviewControllerDataSo
     func openQuick() {
         WebInteraction.downloadFile(url: URL(string: "https://bamboowand.github.io/retrotv.usdz")!) { fileURL in
             VirtualModelEntity.loadAsync(url: fileURL) { [weak self] entity in
-                self?.arView.addModelEntity(entity)
+                self?.arView.placeModel(entity)
                 DispatchQueue.main.async {
                     let quick = QLPreviewController()
                     quick.dataSource = self

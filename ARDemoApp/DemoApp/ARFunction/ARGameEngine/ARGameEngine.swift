@@ -22,7 +22,8 @@ class ARGameEngine: NSObject {
     weak var scene: SCNScene? = nil
     weak var arSession: ARSession? = nil
     // MARK: - Property storge
-    private var _modelEntitys = [VirtualModelEntity]()
+    private(set) var _modelEntitys = [VirtualModelEntity]()
+    private let _updateQueue = DispatchQueue(label: "com.argame_engine_j.serial_scenekit_queue")
     
     // MARK: - Singgleton init
     struct Static {
@@ -81,12 +82,78 @@ class ARGameEngine: NSObject {
         _modelEntitys.remove(at: index)
     }
     
-    // MARK: Place model flow
-    internal func placeModel(_ newModel: VirtualModelEntity, anchor: ARAnchor? = nil) {
-        addModel(newModel)
+    // MARK: - Place model flow
+    internal func placeModel(_ newModel: VirtualModelEntity, point: CGPoint? = nil) {
+        if _modelEntitys.contains(where: { $0.identity == newModel.identity }) && !newModel.shouldUpdateAnchor {
+            return
+        }
+        
         self.view?.prepare([newModel.referenceNode], completionHandler: { [weak self] _ in
-            self?.scene?.rootNode.addChildNode(newModel.referenceNode)
+            guard let screenPos = point != nil ? point : self?.view?.screenCenter,
+                let query = self?.view?.raycastQuery(from: screenPos,
+                                                       allowing: .estimatedPlane,
+                                                       alignment: newModel.allowedAlignment),
+            let result = self?.arSession?.raycast(query).first else { return }
+            
+            newModel.raycastQueue = query
+            newModel.mostRecentInitialPlacementResult = result
+            
+            let trackedRaycast = self?.createTrackedRaycastAndSet3DPosition(of: newModel,
+                                                                            from: query,
+                                                                            withInitialResult: result)
+            newModel.raycast = trackedRaycast
         })
+    }
+    
+    internal func addOrUpdataAnchor(for object: VirtualModelEntity) {
+        _updateQueue.async { [unowned self] in
+            if let anchor = object.anchor {
+                self.arSession?.remove(anchor: anchor)
+            }
+            let newAnchor = ARAnchor(transform: object.referenceNode.simdTransform)
+            object.anchor = newAnchor
+            self.arSession?.add(anchor: newAnchor)
+        }
+    }
+    
+    // - Tag: GetTrackedRaycast
+    internal func createTrackedRaycastAndSet3DPosition(of virtualObject: VirtualModelEntity,
+                                              from query: ARRaycastQuery,
+                                              withInitialResult initialResult: ARRaycastResult? = nil) -> ARTrackedRaycast?
+    {
+        if let initialResult = initialResult {
+//            virtualObject.referenceNode.simdTransform = initialResult.worldTransform
+            virtualObject.referenceNode.simdWorldPosition = initialResult.worldTransform.translation
+            virtualObject.referenceNode.simdWorldOrientation = initialResult.worldTransform.orientation
+        }
+        
+        return arSession?.trackedRaycast(query) { (results) in
+            self.setVirtualObject3DPosition(results, with: virtualObject)
+        }
+    }
+    
+    // - Tag: ProcessRaycastResults
+    private func setVirtualObject3DPosition(_ results: [ARRaycastResult], with virtualObject: VirtualModelEntity) {
+        
+        guard let result = results.first else {
+            fatalError("Unexpected case: the update handler is always supposed to return at least one result.")
+        }
+        
+//        virtualObject.referenceNode.simdTransform = result.worldTransform
+        virtualObject.referenceNode.simdWorldPosition = result.worldTransform.translation
+        virtualObject.referenceNode.simdWorldOrientation = result.worldTransform.orientation
+        
+        // If the virtual object is not yet in the scene, add it.
+        if virtualObject.referenceNode.parent == nil {
+            addModel(virtualObject)
+            scene?.rootNode.addChildNode(virtualObject.referenceNode)
+            virtualObject.shouldUpdateAnchor = true
+        }
+        
+        if virtualObject.shouldUpdateAnchor {
+            virtualObject.shouldUpdateAnchor = false
+            addOrUpdataAnchor(for: virtualObject)
+        }
     }
     
 }

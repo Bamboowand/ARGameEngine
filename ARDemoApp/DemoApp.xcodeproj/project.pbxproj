@@ -177,9 +177,9 @@
 		1FD6008F246E355F00AF0D4B /* ARFunction */ = {
 			isa = PBXGroup;
 			children = (
+				1FD60074246D973700AF0D4B /* ARGameView.swift */,
 				1FD60098246E41BA00AF0D4B /* Workers */,
 				1FD6007B246D9B4E00AF0D4B /* BaseEntity */,
-				1FD60074246D973700AF0D4B /* ARGameView.swift */,
 				1FD6009D246E7A8900AF0D4B /* ARGameEngine */,
 			);
 			path = ARFunction;

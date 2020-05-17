@@ -11,12 +11,12 @@ import SceneKit
 import ARKit
 
 class ViewInteraction: NSObject {
-    let scnView: ARSCNView
+    let scnView: ARGameView
     
-    var selectedNode: SCNNode?
+    var selectedEntity: VirtualModelEntity?
     private var lastRotaion: Float = 0.0
     
-    init(view: ARSCNView) {
+    init(view: ARGameView) {
         self.scnView = view
         super.init()
         self.addGestureForView(view: self.scnView)
@@ -40,6 +40,7 @@ class ViewInteraction: NSObject {
         view.addGestureRecognizer(pinchGesture)
         
         let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(didRotate(_:)))
+        rotationGesture.delegate = self
         view.addGestureRecognizer(rotationGesture)
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
@@ -51,18 +52,18 @@ class ViewInteraction: NSObject {
     func didTapped(_ gesture: UITapGestureRecognizer) {
         let tappedLoaction = gesture.location(in: self.scnView)
         if let node = self.findNode(point: tappedLoaction) {
-            self.selectedNode = node
+            self.selectedEntity = node
         }
     }
     
     @objc
     func didDoubleTapped(_ gesture: UITapGestureRecognizer) {
-        self.selectedNode = nil
+        self.selectedEntity = nil
     }
         
     @objc
     func didPinch(_ gesture: UIPinchGestureRecognizer) {
-        guard let node = self.selectedNode else {
+        guard let node = self.selectedEntity?.referenceNode else {
             return
         }
         
@@ -88,7 +89,7 @@ class ViewInteraction: NSObject {
         
     @objc
     func didRotate(_ gesture: UIRotationGestureRecognizer) {
-        guard let node = self.selectedNode else {
+        guard let node = self.selectedEntity?.referenceNode else {
             return
         }
         
@@ -104,12 +105,13 @@ class ViewInteraction: NSObject {
         
     @objc
     func didPan(_ gesture: UIPanGestureRecognizer) {
-        guard let node = self.selectedNode else {
+        guard let node = self.selectedEntity?.referenceNode else {
             return
         }
         
         switch gesture.state {
         case .changed where gesture.numberOfTouches == 1 :
+            self.selectedEntity?.stopTrackedRaycast()
             let translation = gesture.translation(in: scnView)
             let current = scnView.projectPoint(node.position)
             let updatePoint = CGPoint(x: CGFloat(current.x) + translation.x, y: CGFloat(current.y) + translation.y)
@@ -118,18 +120,27 @@ class ViewInteraction: NSObject {
             
             gesture.setTranslation(.zero, in: scnView)
         case .changed where gesture.numberOfTouches == 2:
+            self.selectedEntity?.stopTrackedRaycast()
             if gesture.verticalDirection(target: scnView) == .Up {
                 node.position.y += 0.01
             }
             else {
                 node.position.y -= 0.01
             }
+        case .ended :
+            self.selectedEntity?.stopTrackedRaycast()
+            self.selectedEntity?.shouldUpdateAnchor = true
+            let translation = gesture.translation(in: scnView)
+            let current = scnView.projectPoint(node.position)
+            let updatePoint = CGPoint(x: CGFloat(current.x) + translation.x, y: CGFloat(current.y) + translation.y)
+            scnView.placeModel(self.selectedEntity!, point: updatePoint)
+            
         default:
             break
         }
     }
     
-    func findNode(point: CGPoint) -> SCNNode? {
+    func findNode(point: CGPoint) -> VirtualModelEntity? {
         let hitTestOptions: [SCNHitTestOption: Any] = [.boundingBoxOnly: true]
         let hitTestResults = scnView.hitTest(point, options: hitTestOptions)
         return hitTestResults.lazy.compactMap { result in
@@ -137,9 +148,10 @@ class ViewInteraction: NSObject {
         }.first
     }
     
-    static func existingObjectContainingNode(_ node: SCNNode) -> SCNReferenceNode? {
-        if let virtualObjectRoot = node as? SCNReferenceNode {
-            return virtualObjectRoot
+    static func existingObjectContainingNode(_ node: SCNNode) -> VirtualModelEntity? {
+        if let virtualObjectRoot = node as? SCNReferenceNode,
+            let id = virtualObjectRoot.name {
+            return ARGameEngine.shared._modelEntitys.filter { $0.identity == id }.first
         }
         
         guard let parent = node.parent else { return nil }
@@ -209,5 +221,12 @@ extension UIPanGestureRecognizer {
         return (self.horizontalDirection(target: target), self.verticalDirection(target: target))
     }
 
+}
+
+extension ViewInteraction: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Allow objects to be translated and rotated at the same time.
+        return true
+    }
 }
 
