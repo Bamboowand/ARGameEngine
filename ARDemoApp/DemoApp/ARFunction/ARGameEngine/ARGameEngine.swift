@@ -105,6 +105,7 @@ class ARGameEngine: NSObject {
             
             self?.setObjectTransform(of: newModel, with: result)
             self?.scene?.rootNode.addChildNode(newModel.referenceNode)
+            self?.addModel(newModel)
             
         })
     }

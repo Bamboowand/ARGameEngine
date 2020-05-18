@@ -61,7 +61,7 @@ public class VirtualModelEntity: GKEntity, HasModelTrackedRaycast {
         }
         self.referenceNode = reference
         super.init()
-        self.referenceNode.name = "\(self.modelName)_\(self.identity)"
+        self.referenceNode.name = "\(self.identity)"
     }
     
     required init?(coder: NSCoder) {

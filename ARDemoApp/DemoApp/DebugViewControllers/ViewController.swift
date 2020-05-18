@@ -13,12 +13,19 @@ import QuickLook
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var addBtn: UIButton!
+    @IBOutlet weak var clearBtn: UIButton!
+    @IBOutlet weak var operactedView: UIView!
     var currentEntity: VirtualModelEntity?
 
     @IBOutlet weak var arView: ARGameView!
     lazy var viewInteraction = ViewInteraction(view: self.arView)
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.addBtn.isHidden = true
+        self.addBtn.alpha = 0.0
+        self.clearBtn.isHidden = true
+        self.clearBtn.alpha = 0.0
 //        let arView = ARGameView()
 //        arView.translatesAutoresizingMaskIntoConstraints = false
 //        self.view.addSubview(arView)
@@ -64,12 +71,48 @@ class ViewController: UIViewController {
         viewInteraction.selectedEntity = currentEntity!
         currentEntity!.referenceNode.scale = SCNVector3(0.001, 0.001, 0.001)
         self.arView.placeModel(currentEntity!)
+        self.hideView(uiComponent: self.addBtn)
+        self.unhideView(uiComponent: self.clearBtn)
     }
     
     @IBAction func clearAction(_ sender: Any) {
         self.arView.clearScene()
+        self.hideView(uiComponent: self.clearBtn)
         WebInteraction.clearTemp()
     }
+    
+    func hideOperactedView() {
+        UIView.animate(withDuration: 0.4, animations: { [unowned self] in
+            self.operactedView.alpha = 0.0
+        },
+        completion: { [unowned self] _ in
+            self.operactedView.isHidden = true
+        })
+    }
+    
+    func unhideOperactedView() {
+        UIView.animate(withDuration: 0.4, animations: { [unowned self] in
+            self.operactedView.isHidden = false
+            self.operactedView.alpha = 1.0
+        })
+    }
+    
+    func hideView(uiComponent: UIView) {
+        UIView.animate(withDuration: 0.4, animations: {
+            uiComponent.alpha = 0.0
+        },
+        completion: { _ in
+            uiComponent.isHidden = true
+        })
+    }
+    
+    func unhideView(uiComponent: UIView) {
+        UIView.animate(withDuration: 0.4, animations: {
+            uiComponent.isHidden = false
+            uiComponent.alpha = 1.0
+        })
+    }
+    
 }
 
 extension ViewController: UIPopoverPresentationControllerDelegate {
@@ -82,8 +125,15 @@ extension ViewController: MenuViewSelect {
     func selectMenuView(selectString: String) {
         VirtualModelEntity.loadAsync(name: selectString) { [weak self] virtual in
             DispatchQueue.main.async {
-                    MenuViewController.ModelPhotoDict[virtual.referenceNode.referenceURL.lastPathComponent] = virtual.photo
-                    self?.currentEntity = virtual
+                MenuViewController.ModelPhotoDict[virtual.referenceNode.referenceURL.lastPathComponent] = virtual.photo
+                self?.currentEntity = virtual
+                
+                self?.unhideView(uiComponent: self!.addBtn)
+                
+                if ARGameEngine.shared._modelEntitys.count > 0 {
+                    self?.unhideView(uiComponent: self!.clearBtn)
+                }
+                
             }
         }
     }

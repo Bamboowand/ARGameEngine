@@ -19,55 +19,72 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                             </arscnView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Idu-nE-rHq">
-                                <rect key="frame" x="32" y="77.5" width="21" height="18"/>
+                                <rect key="frame" x="32" y="77.5" width="41.5" height="38"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" backgroundImage="text.justify" catalog="system"/>
                                 <connections>
                                     <action selector="showMenuAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QCd-OA-t0u"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1Y-VB-eFq">
-                                <rect key="frame" x="176" y="757.5" width="62" height="61"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" backgroundImage="plus.circle.fill" catalog="system"/>
-                                <connections>
-                                    <action selector="addObjectAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="93z-MH-i6z"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wxi-uj-hIy">
-                                <rect key="frame" x="23" y="776.5" width="41.5" height="42"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" backgroundImage="trash.fill" catalog="system"/>
-                                <connections>
-                                    <action selector="clearAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="127-FR-brR"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U7q-0B-qrN">
+                                <rect key="frame" x="0.0" y="776" width="414" height="66"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1Y-VB-eFq">
+                                        <rect key="frame" x="176" y="-5.5" width="62" height="61"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" backgroundImage="plus.circle.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="addObjectAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="93z-MH-i6z"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wxi-uj-hIy">
+                                        <rect key="frame" x="24" y="13.5" width="41.5" height="42"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" backgroundImage="trash.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="clearAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="127-FR-brR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="u1Y-VB-eFq" secondAttribute="bottom" constant="10" id="F66-zI-Wvg"/>
+                                    <constraint firstItem="Wxi-uj-hIy" firstAttribute="height" secondItem="U7q-0B-qrN" secondAttribute="width" multiplier="0.1" id="HwV-BB-11c"/>
+                                    <constraint firstItem="u1Y-VB-eFq" firstAttribute="height" secondItem="U7q-0B-qrN" secondAttribute="width" multiplier="0.15" id="PZJ-PV-zt7"/>
+                                    <constraint firstAttribute="bottom" secondItem="Wxi-uj-hIy" secondAttribute="bottom" constant="10" id="Qqn-47-SvZ"/>
+                                    <constraint firstItem="Wxi-uj-hIy" firstAttribute="leading" secondItem="U7q-0B-qrN" secondAttribute="leading" constant="24" id="euD-ZB-iJO"/>
+                                    <constraint firstItem="u1Y-VB-eFq" firstAttribute="width" secondItem="U7q-0B-qrN" secondAttribute="width" multiplier="0.15" id="ez2-cm-FFc"/>
+                                    <constraint firstItem="u1Y-VB-eFq" firstAttribute="centerX" secondItem="U7q-0B-qrN" secondAttribute="centerX" id="sBC-2K-r6H"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Wxi-uj-hIy" secondAttribute="bottom" constant="43" id="1pZ-Om-9kW"/>
-                            <constraint firstItem="Wxi-uj-hIy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="23" id="2ng-Rv-bxd"/>
+                            <constraint firstItem="U7q-0B-qrN" firstAttribute="height" secondItem="oQt-NI-5Pz" secondAttribute="width" multiplier="0.16" id="2AN-xW-fh0"/>
                             <constraint firstItem="oQt-NI-5Pz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="6oW-MK-LhA"/>
+                            <constraint firstItem="U7q-0B-qrN" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="DsA-dt-QFq"/>
                             <constraint firstItem="oQt-NI-5Pz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Hb4-Ro-9ra"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="u1Y-VB-eFq" secondAttribute="bottom" constant="43" id="J9E-dt-2GB"/>
-                            <constraint firstItem="u1Y-VB-eFq" firstAttribute="width" secondItem="oQt-NI-5Pz" secondAttribute="width" multiplier="0.15" id="Jxd-oM-dMa"/>
+                            <constraint firstItem="U7q-0B-qrN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Krw-Tr-Q4g"/>
+                            <constraint firstItem="Idu-nE-rHq" firstAttribute="width" secondItem="oQt-NI-5Pz" secondAttribute="width" multiplier="0.1" id="KsS-Pt-WeK"/>
                             <constraint firstItem="Idu-nE-rHq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="N02-T0-ogh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oQt-NI-5Pz" secondAttribute="trailing" id="QKL-L9-bxY"/>
-                            <constraint firstItem="u1Y-VB-eFq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SZL-mL-a5N"/>
-                            <constraint firstItem="Wxi-uj-hIy" firstAttribute="width" secondItem="oQt-NI-5Pz" secondAttribute="width" multiplier="0.1" id="V2W-AT-tfd"/>
-                            <constraint firstItem="u1Y-VB-eFq" firstAttribute="height" secondItem="oQt-NI-5Pz" secondAttribute="width" multiplier="0.15" id="cPo-iM-Dx8"/>
-                            <constraint firstItem="Wxi-uj-hIy" firstAttribute="height" secondItem="oQt-NI-5Pz" secondAttribute="width" multiplier="0.1" id="mY2-Lx-3BX"/>
+                            <constraint firstItem="Wxi-uj-hIy" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.1" id="f4W-Xv-gzn"/>
+                            <constraint firstItem="U7q-0B-qrN" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-20" id="hKv-0y-0vy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="oQt-NI-5Pz" secondAttribute="bottom" id="mdI-SQ-h6u"/>
+                            <constraint firstItem="Idu-nE-rHq" firstAttribute="height" secondItem="oQt-NI-5Pz" secondAttribute="width" multiplier="0.1" id="nKV-vg-ioJ"/>
                             <constraint firstItem="Idu-nE-rHq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="rP0-tr-yJB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="addBtn" destination="u1Y-VB-eFq" id="l0W-EC-K21"/>
                         <outlet property="arView" destination="oQt-NI-5Pz" id="xjS-UY-Ukb"/>
+                        <outlet property="clearBtn" destination="Wxi-uj-hIy" id="uhe-ed-Zzn"/>
+                        <outlet property="operactedView" destination="U7q-0B-qrN" id="0bl-5U-zUH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="68"/>
+            <point key="canvasLocation" x="137.68115942028987" y="67.633928571428569"/>
         </scene>
     </scenes>
     <resources>

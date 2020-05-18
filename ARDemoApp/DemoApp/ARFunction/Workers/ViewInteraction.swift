@@ -105,12 +105,18 @@ class ViewInteraction: NSObject {
         
     @objc
     func didPan(_ gesture: UIPanGestureRecognizer) {
-        guard let node = self.selectedEntity?.referenceNode else {
-            return
-        }
+        
         
         switch gesture.state {
+        case .began:
+            let tappedLoaction = gesture.location(in: self.scnView)
+            if let node = self.findNode(point: tappedLoaction) {
+                self.selectedEntity = node
+            }
         case .changed where gesture.numberOfTouches == 1 :
+            guard let node = self.selectedEntity?.referenceNode else {
+                return
+            }
             self.selectedEntity?.stopTrackedRaycast()
             let translation = gesture.translation(in: scnView)
             let current = scnView.projectPoint(node.position)
