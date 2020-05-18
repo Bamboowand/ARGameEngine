@@ -63,14 +63,18 @@ class ViewInteraction: NSObject {
         
     @objc
     func didPinch(_ gesture: UIPinchGestureRecognizer) {
-        guard let node = self.selectedEntity?.referenceNode else {
-            return
-        }
         
         switch gesture.state {
         case .began:
-            gesture.scale = CGFloat(node.scale.x)
+            let tappedLoaction = gesture.location(in: self.scnView)
+            if let node = self.findNode(point: tappedLoaction) {
+                self.selectedEntity = node
+                gesture.scale = CGFloat(node.referenceNode.scale.x)
+            }
         case .changed:
+            guard let node = self.selectedEntity?.referenceNode else {
+                return
+            }
             var newScale: CGFloat = 1.0
             if gesture.scale < 0.0001 {
                 newScale = 0.001
@@ -89,12 +93,17 @@ class ViewInteraction: NSObject {
         
     @objc
     func didRotate(_ gesture: UIRotationGestureRecognizer) {
-        guard let node = self.selectedEntity?.referenceNode else {
-            return
-        }
         
         switch gesture.state {
+        case .began:
+            let tappedLoaction = gesture.location(in: self.scnView)
+            if let node = self.findNode(point: tappedLoaction) {
+                self.selectedEntity = node
+            }
         case .changed:
+            guard let node = self.selectedEntity?.referenceNode else {
+                return
+            }
             node.eulerAngles.y = self.lastRotaion - Float(gesture.rotation)
         case .ended:
             self.lastRotaion -= Float(gesture.rotation)
