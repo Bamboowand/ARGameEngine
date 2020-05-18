@@ -119,22 +119,14 @@ class ViewInteraction: NSObject {
             self.translationByHitTest(node: node, basedOn: updatePoint)
             
             gesture.setTranslation(.zero, in: scnView)
-        case .changed where gesture.numberOfTouches == 2:
-            self.selectedEntity?.stopTrackedRaycast()
-            if gesture.verticalDirection(target: scnView) == .Up {
-                node.position.y += 0.01
-            }
-            else {
-                node.position.y -= 0.01
-            }
-        case .ended :
-            self.selectedEntity?.stopTrackedRaycast()
-            self.selectedEntity?.shouldUpdateAnchor = true
-            let translation = gesture.translation(in: scnView)
-            let current = scnView.projectPoint(node.position)
-            let updatePoint = CGPoint(x: CGFloat(current.x) + translation.x, y: CGFloat(current.y) + translation.y)
-            scnView.placeModel(self.selectedEntity!, point: updatePoint)
-            
+//        case .changed where gesture.numberOfTouches == 2:
+//            self.selectedEntity?.stopTrackedRaycast()
+//            if gesture.verticalDirection(target: scnView) == .Up {
+//                node.position.y += 0.01
+//            }
+//            else {
+//                node.position.y -= 0.01
+//            }
         default:
             break
         }

@@ -62,7 +62,6 @@ class ViewController: UIViewController {
         }
         
         viewInteraction.selectedEntity = currentEntity!
-//        currentEntity!.referenceNode.simdWorldTransform = result.worldTransform
         currentEntity!.referenceNode.scale = SCNVector3(0.001, 0.001, 0.001)
         self.arView.placeModel(currentEntity!)
     }

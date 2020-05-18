@@ -83,6 +83,11 @@ class ARGameEngine: NSObject {
     }
     
     // MARK: - Place model flow
+    private func setObjectTransform(of virtualObject: VirtualModelEntity, with result: ARRaycastResult) {
+        virtualObject.referenceNode.simdWorldPosition = result.worldTransform.translation
+        virtualObject.referenceNode.simdWorldOrientation = result.worldTransform.orientation
+    }
+    
     internal func placeModel(_ newModel: VirtualModelEntity, point: CGPoint? = nil) {
         if _modelEntitys.contains(where: { $0.identity == newModel.identity }) && !newModel.shouldUpdateAnchor {
             return
@@ -98,10 +103,9 @@ class ARGameEngine: NSObject {
             newModel.raycastQueue = query
             newModel.mostRecentInitialPlacementResult = result
             
-            let trackedRaycast = self?.createTrackedRaycastAndSet3DPosition(of: newModel,
-                                                                            from: query,
-                                                                            withInitialResult: result)
-            newModel.raycast = trackedRaycast
+            self?.setObjectTransform(of: newModel, with: result)
+            self?.scene?.rootNode.addChildNode(newModel.referenceNode)
+            
         })
     }
     
