@@ -126,10 +126,10 @@ public class FocusSquare: FocusNode {
 		for segment in segments {
 			segment.open()
 		}
-		SCNTransaction.completionBlock = {
-			self.positioningNode.runAction(pulseAction(), forKey: "pulse")
+		SCNTransaction.completionBlock = { [weak self] in
+			self?.positioningNode.runAction(pulseAction(), forKey: "pulse")
 			// This is a safe operation because `SCNTransaction`'s completion block is called back on the main thread.
-			self.isAnimating = false
+			self?.isAnimating = false
 		}
 		SCNTransaction.commit()
 		// Add a scale/bounce animation.
@@ -154,7 +154,10 @@ public class FocusSquare: FocusNode {
 		SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
 		SCNTransaction.animationDuration = FocusSquare.animationDuration / 2
 		positioningNode.opacity = 0.99
-		SCNTransaction.completionBlock = {
+		SCNTransaction.completionBlock = { [weak self] in
+            guard let self = self else {
+                return
+            }
 			SCNTransaction.begin()
 			SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
 			SCNTransaction.animationDuration = FocusSquare.animationDuration / 4

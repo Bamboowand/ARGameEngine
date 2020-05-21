@@ -148,7 +148,7 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
 extension ViewController: MenuViewSelect {
     func selectMenuView(selectString: String) {
         VirtualModelEntityLoader.loadAsync(name: selectString) { [weak self] virtual in
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
                 MenuViewController.ModelPhotoDict[virtual.referenceNode.referenceURL.lastPathComponent] = virtual.photo
                 self?.currentEntity = virtual
                 

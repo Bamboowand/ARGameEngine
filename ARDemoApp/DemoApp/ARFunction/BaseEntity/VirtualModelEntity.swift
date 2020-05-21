@@ -93,8 +93,8 @@ public class VirtualModelEntityLoader {
     }
 
     static func loadAsync(url: URL, loadedHandle: @escaping (VirtualModelEntity) -> Void) {
+        let entity = VirtualModelEntity(url: url)
         DispatchQueue.global(qos: .userInitiated).async {
-            let entity = VirtualModelEntity(url: url)
             entity.isLoading = true
             let startTime = CFAbsoluteTimeGetCurrent()
             entity.referenceNode.load()
@@ -114,7 +114,10 @@ public class VirtualModelEntityLoader {
             catch {
                 fatalError("Failed to load SCNScene from \(entity.modelName) referenceURL")
             }
-            loadedHandle(entity)
+            DispatchQueue.main.async {
+                loadedHandle(entity)
+            }
+            entity.referenceNode.unload()
             let endTime = CFAbsoluteTimeGetCurrent()
             debugPrint("Virtual model load \(entity.modelName) in \((endTime - startTime) * 1000) millisecond")
         }
