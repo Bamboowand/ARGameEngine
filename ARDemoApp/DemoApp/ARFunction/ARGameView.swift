@@ -12,6 +12,8 @@ import SceneKit
 
 public class ARGameView: ARSCNView {
     private let _engine: ARGameEngine = ARGameEngine.shared
+    private var _lightView: UIView?
+
     
     var screenCenter: CGPoint {
         return CGPoint(x: bounds.midX, y: bounds.midY)
@@ -50,6 +52,14 @@ public class ARGameView: ARSCNView {
         _engine.arSession = self.session
         self.session.delegate = _engine
         self.delegate = _engine
+        
+        // Take picture
+        _lightView = UIView(frame: self.bounds)
+        _lightView?.alpha = 0
+        _lightView?.isHidden = true
+        _lightView?.backgroundColor = UIColor.black
+        self.addSubview(_lightView!)
+
     }
     
     // MARK: - AR Flow
@@ -78,6 +88,20 @@ public class ARGameView: ARSCNView {
         _engine.clearScene()
     }
     
+    public func takePicture() {
+        self._lightView?.isHidden = false
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveEaseOut], animations: { [weak self] in
+            self?._lightView?.alpha = 1.0
+        }, completion: { [weak self] (finished: Bool) -> Void in
+            self?._lightView?.alpha = 0.0
+            self?._lightView?.isHidden = true
+            
+        })
+        // Play the camera shutter system sound
+        AudioServicesPlaySystemSound(1108)
+        let photo = self.snapshot()
+        UIImageWriteToSavedPhotosAlbum(photo, nil, nil, nil)
+    }
 }
 
 extension ARGameView: ARSmartHitTest { }

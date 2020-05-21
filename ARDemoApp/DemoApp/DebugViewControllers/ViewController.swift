@@ -53,6 +53,7 @@ class ViewController: UIViewController {
         WebInteraction.clearTemp()
     }
 
+    // MARK: - Action methods
     @IBAction func showMenuAction(_ sender: UIButton) {
         let menuController = MenuViewController()
         menuController.modalPresentationStyle = .popover
@@ -100,8 +101,8 @@ class ViewController: UIViewController {
         }
     }
     
-    func search(node: SCNNode) {
-        
+    @IBAction func takePictureAction(_ sender: Any) {
+        self.arView.takePicture()
     }
     
     func hideOperactedView() {

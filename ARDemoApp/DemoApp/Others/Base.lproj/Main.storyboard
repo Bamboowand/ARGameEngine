@@ -65,6 +65,15 @@
                                     <action selector="changeTexture:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8yx-7W-zfi"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qBQ-7F-7WA">
+                                <rect key="frame" x="232" y="77.5" width="55" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" backgroundImage="camera.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="takePictureAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0dN-n5-YUw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -151,6 +160,7 @@
     </scenes>
     <resources>
         <image name="arrow.2.circlepath.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="camera.fill" catalog="system" width="128" height="96"/>
         <image name="folder.fill" catalog="system" width="128" height="95"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="text.justify" catalog="system" width="128" height="100"/>
