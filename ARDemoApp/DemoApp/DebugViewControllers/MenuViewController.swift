@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol MenuViewSelect {
+protocol MenuViewSelect: class {
     func selectMenuView(selectString: String)
 }
 
@@ -16,9 +16,9 @@ class MenuViewController: UITableViewController {
     
     static var ModelPhotoDict = [ String : UIImage ]()
         
-    let modelNames = ["diplodocus.usdz", "t_rex.usdz"]
+    let modelNames = ["桌子.usdz", "椅子.usdz", "電腦椅.usdz"]
     
-    var callBack: MenuViewSelect? = nil
+    weak var callBack: MenuViewSelect? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,13 +41,16 @@ class MenuViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = modelNames[indexPath.row]
+        let str = modelNames[indexPath.row].components(separatedBy: ".")
+        cell.textLabel?.text = str[0]
         if let photo = MenuViewController.ModelPhotoDict[modelNames[indexPath.row]] {
             cell.imageView!.image = photo
         }
         else {
             cell.imageView!.image = UIImage(systemName: "circle")
         }
+        cell.backgroundColor = UIColor.white
+        cell.textLabel?.textColor = UIColor.black
 //        cell.imageView!.image = UIImage(system)
         return cell
     }

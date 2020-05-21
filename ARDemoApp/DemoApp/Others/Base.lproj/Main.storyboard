@@ -56,6 +56,15 @@
                                     <constraint firstItem="u1Y-VB-eFq" firstAttribute="centerX" secondItem="U7q-0B-qrN" secondAttribute="centerX" id="sBC-2K-r6H"/>
                                 </constraints>
                             </view>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rvn-li-Qol">
+                                <rect key="frame" x="304" y="76.5" width="64" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" backgroundImage="arrow.2.circlepath.circle.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="changeTexture:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8yx-7W-zfi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -86,8 +95,63 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="67.633928571428569"/>
         </scene>
+        <!--Web Demo View Controller-->
+        <scene sceneID="kT1-i4-JDG">
+            <objects>
+                <viewController id="lhB-4w-oOk" customClass="WebDemoViewController" customModule="DemoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="K2J-c8-idw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4gK-fY-AAS" customClass="ARGameView" customModule="DemoApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </arscnView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Fe-Gv-93f">
+                                <rect key="frame" x="30" y="65" width="41.5" height="39"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" backgroundImage="folder.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="showMenuAction:" destination="lhB-4w-oOk" eventType="touchUpInside" id="jRE-1Y-usU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AgA-3f-X8K">
+                                <rect key="frame" x="20" y="799.5" width="41.5" height="42"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" backgroundImage="trash.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="clearAction:" destination="lhB-4w-oOk" eventType="touchUpInside" id="6Qr-xL-sbp"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="4gK-fY-AAS" firstAttribute="top" secondItem="K2J-c8-idw" secondAttribute="top" id="5Ig-HK-i5Y"/>
+                            <constraint firstItem="P4Y-3V-Fob" firstAttribute="bottom" secondItem="AgA-3f-X8K" secondAttribute="bottom" constant="20" id="5Rk-gH-h2e"/>
+                            <constraint firstItem="4gK-fY-AAS" firstAttribute="bottom" secondItem="K2J-c8-idw" secondAttribute="bottom" id="7YK-tf-XT2"/>
+                            <constraint firstItem="1Fe-Gv-93f" firstAttribute="width" secondItem="4gK-fY-AAS" secondAttribute="width" multiplier="0.1" id="Ok7-F8-4GR"/>
+                            <constraint firstItem="4gK-fY-AAS" firstAttribute="leading" secondItem="P4Y-3V-Fob" secondAttribute="leading" id="QkI-vA-JFX"/>
+                            <constraint firstItem="1Fe-Gv-93f" firstAttribute="height" secondItem="4gK-fY-AAS" secondAttribute="width" multiplier="0.1" id="SkG-5X-DIz"/>
+                            <constraint firstItem="AgA-3f-X8K" firstAttribute="width" secondItem="4gK-fY-AAS" secondAttribute="width" multiplier="0.1" id="Ucw-Cb-bO1"/>
+                            <constraint firstItem="1Fe-Gv-93f" firstAttribute="top" secondItem="P4Y-3V-Fob" secondAttribute="top" constant="20" id="Ug6-bN-X89"/>
+                            <constraint firstItem="AgA-3f-X8K" firstAttribute="leading" secondItem="P4Y-3V-Fob" secondAttribute="leading" constant="20" id="abE-Z5-KeC"/>
+                            <constraint firstItem="1Fe-Gv-93f" firstAttribute="leading" secondItem="P4Y-3V-Fob" secondAttribute="leading" constant="30" id="b3x-tr-kOg"/>
+                            <constraint firstItem="4gK-fY-AAS" firstAttribute="trailing" secondItem="P4Y-3V-Fob" secondAttribute="trailing" id="tBk-Tn-80J"/>
+                            <constraint firstItem="AgA-3f-X8K" firstAttribute="height" secondItem="4gK-fY-AAS" secondAttribute="width" multiplier="0.1" id="xov-mR-xi5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="P4Y-3V-Fob"/>
+                    </view>
+                    <connections>
+                        <outlet property="arView" destination="4gK-fY-AAS" id="eub-MS-PEV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oho-xP-bNm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="825"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="arrow.2.circlepath.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="folder.fill" catalog="system" width="128" height="95"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="text.justify" catalog="system" width="128" height="100"/>
         <image name="trash.fill" catalog="system" width="121" height="128"/>

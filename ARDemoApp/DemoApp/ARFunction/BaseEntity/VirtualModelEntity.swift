@@ -24,8 +24,8 @@ public class VirtualModelEntity: GKEntity, HasModelTrackedRaycast {
     var trackedRaycastProperty = TrackedRaycastProperty()
     
     let referenceNode: SCNReferenceNode
-    private(set) var isLoading: Bool = false
-    private(set) var photo: UIImage? = nil
+    var isLoading: Bool = false
+    var photo: UIImage? = nil
     
     var modelName: String  {
         return referenceNode.referenceURL.lastPathComponent.components(separatedBy: ".").dropLast().last!
@@ -71,7 +71,9 @@ public class VirtualModelEntity: GKEntity, HasModelTrackedRaycast {
     deinit {
         print("J_☠️ VirtualModelEntity release id = \(self.identity), model name: \(self.modelName), type: \(self.fileType)")
     }
-    
+}
+
+public class VirtualModelEntityLoader {
     // MARK: - Load model methods
     static func loadAsync(name: String, in bundle: Bundle? = nil, loadedHandle: @escaping (VirtualModelEntity) -> Void) {
         var loadUrl: URL
@@ -87,16 +89,20 @@ public class VirtualModelEntity: GKEntity, HasModelTrackedRaycast {
             }
             loadUrl = url
         }
-        VirtualModelEntity.loadAsync(url: loadUrl, loadedHandle: loadedHandle)
+        VirtualModelEntityLoader.loadAsync(url: loadUrl, loadedHandle: loadedHandle)
     }
 
     static func loadAsync(url: URL, loadedHandle: @escaping (VirtualModelEntity) -> Void) {
-        let entity = VirtualModelEntity(url: url)
-        entity.isLoading = true
         DispatchQueue.global(qos: .userInitiated).async {
+            let entity = VirtualModelEntity(url: url)
+            entity.isLoading = true
             let startTime = CFAbsoluteTimeGetCurrent()
             entity.referenceNode.load()
             entity.isLoading = false
+            entity.referenceNode.categoryBitMask = CategoryBitMask.categoryToSelect.rawValue
+            entity.referenceNode.enumerateChildNodes { (node, _) in
+                node.categoryBitMask = CategoryBitMask.categoryToSelect.rawValue
+            }
             
             let render = SCNRenderer(device: MTLCreateSystemDefaultDevice(), options: nil)
             do {

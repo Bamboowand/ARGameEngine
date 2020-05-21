@@ -22,12 +22,14 @@ extension ARGameEngine: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         
         
-        DispatchQueue.main.async {
-            if let planeAnchor = anchor as? ARPlaneAnchor {
-                let plane = ARSCNPlaneGeometry(device: MTLCreateSystemDefaultDevice()!)
-                plane?.update(from: planeAnchor.geometry)
-                plane?.firstMaterial?.colorBufferWriteMask = .alpha
-                node.geometry = plane
+//        DispatchQueue.main.async {
+//            if let planeAnchor = anchor as? ARPlaneAnchor {
+//                let plane = ARSCNPlaneGeometry(device: MTLCreateSystemDefaultDevice()!)
+//                plane?.update(from: planeAnchor.geometry)
+////                plane?.firstMaterial?.colorBufferWriteMask = .alpha
+//                plane?.firstMaterial?.diffuse.contents = UIColor.red.withAlphaComponent(0.7)
+//                node.geometry = plane
+//                node.name = "Occlusion Plane"
                 
 //                guard let occulusion = node.childNode(withName: "plane", recursively: false) else {
 //                    let newOcculusion = SCNNode()
@@ -42,8 +44,8 @@ extension ARGameEngine: ARSCNViewDelegate {
 //                    occulusion.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
 //                }
                 
-            }
-        }
+//            }
+//        }
         
     }
     

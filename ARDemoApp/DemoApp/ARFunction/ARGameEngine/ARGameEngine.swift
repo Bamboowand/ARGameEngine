@@ -11,6 +11,12 @@ import GameplayKit
 import SceneKit
 import ARKit
 
+enum CategoryBitMask: Int {
+    case categoryToSelect = 2        // 010
+    case otherCategoryToSelect = 4   // 100
+    // you can add more bit masks below . . .
+}
+
 class ARGameEngine: NSObject {
     public let focusNode = FocusSquare()
     weak var view: ARGameView? {
@@ -25,7 +31,7 @@ class ARGameEngine: NSObject {
     private(set) var _modelEntitys = [VirtualModelEntity]()
     private let _updateQueue = DispatchQueue(label: "com.argame_engine_j.serial_scenekit_queue")
     
-    // MARK: - Singgleton init
+    // MARK: - Singleton init
     struct Static {
         internal static var instance: ARGameEngine?
     }

@@ -21,11 +21,16 @@ public class ARGameView: ARSCNView {
     private lazy var configuation: ARWorldTrackingConfiguration = {
         let config = ARWorldTrackingConfiguration()
         config.planeDetection = [.horizontal, .vertical]
+        config.isLightEstimationEnabled = true
         if #available(iOS 12.0, *) {
             config.environmentTexturing = .automatic
         }
-
+        
         self.automaticallyUpdatesLighting = true
+        
+        // Debug option
+        self.debugOptions = [.showFeaturePoints]
+        
         return config
     }()
     
@@ -49,7 +54,6 @@ public class ARGameView: ARSCNView {
     
     // MARK: - AR Flow
     public func run() {
-        self.debugOptions = [.showWorldOrigin, .showFeaturePoints]
         self.session.run(configuation, options: [])
     }
     

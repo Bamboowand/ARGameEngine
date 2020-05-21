@@ -51,9 +51,12 @@ class ViewInteraction: NSObject {
     @objc
     func didTapped(_ gesture: UITapGestureRecognizer) {
         let tappedLoaction = gesture.location(in: self.scnView)
-        if let node = self.findNode(point: tappedLoaction) {
-            self.selectedEntity = node
+        guard let node = self.findNode(point: tappedLoaction) else {
+            self.selectedEntity = nil
+            return
         }
+        
+        self.selectedEntity = node
     }
     
     @objc
@@ -67,10 +70,14 @@ class ViewInteraction: NSObject {
         switch gesture.state {
         case .began:
             let tappedLoaction = gesture.location(in: self.scnView)
-            if let node = self.findNode(point: tappedLoaction) {
-                self.selectedEntity = node
-                gesture.scale = CGFloat(node.referenceNode.scale.x)
+            guard let node = self.findNode(point: tappedLoaction) else {
+                self.selectedEntity = nil
+                return
             }
+            
+            self.selectedEntity = node
+            gesture.scale = CGFloat(node.referenceNode.scale.x)
+
         case .changed:
             guard let node = self.selectedEntity?.referenceNode else {
                 return
@@ -80,12 +87,13 @@ class ViewInteraction: NSObject {
                 newScale = 0.001
             }
             else if gesture.scale > 5 {
-                newScale = 5.0
+                newScale = 1.0
             }
             else {
                 newScale = gesture.scale
             }
             node.scale = SCNVector3(newScale, newScale, newScale)
+
         default:
             break
         }
@@ -97,16 +105,19 @@ class ViewInteraction: NSObject {
         switch gesture.state {
         case .began:
             let tappedLoaction = gesture.location(in: self.scnView)
-            if let node = self.findNode(point: tappedLoaction) {
-                self.selectedEntity = node
-            }
-        case .changed:
-            guard let node = self.selectedEntity?.referenceNode else {
+            guard let node = self.findNode(point: tappedLoaction) else {
+                self.selectedEntity = nil
                 return
             }
-            node.eulerAngles.y = self.lastRotaion - Float(gesture.rotation)
-        case .ended:
-            self.lastRotaion -= Float(gesture.rotation)
+            self.selectedEntity = node
+        case .changed:
+            guard let node = self.selectedEntity else {
+                return
+            }
+            node.objectRotation -= Float(gesture.rotation)
+            gesture.rotation = 0.0
+//        case .ended:
+//            self.lastRotaion -= Float(gesture.rotation)
         default:
             break
         }
@@ -115,13 +126,15 @@ class ViewInteraction: NSObject {
     @objc
     func didPan(_ gesture: UIPanGestureRecognizer) {
         
+        let tappedLoaction = gesture.location(in: self.scnView)
         
         switch gesture.state {
         case .began:
-            let tappedLoaction = gesture.location(in: self.scnView)
-            if let node = self.findNode(point: tappedLoaction) {
-                self.selectedEntity = node
+            guard let node = self.findNode(point: tappedLoaction) else {
+                self.selectedEntity = nil
+                return
             }
+            self.selectedEntity = node
         case .changed where gesture.numberOfTouches == 1 :
             guard let node = self.selectedEntity?.referenceNode else {
                 return
@@ -130,8 +143,8 @@ class ViewInteraction: NSObject {
             let translation = gesture.translation(in: scnView)
             let current = scnView.projectPoint(node.position)
             let updatePoint = CGPoint(x: CGFloat(current.x) + translation.x, y: CGFloat(current.y) + translation.y)
-//            self.translationByRaycast(node: node, basedOn: updatePoint)
-            self.translationByHitTest(node: node, basedOn: updatePoint)
+            self.translationByRaycast(node: node, basedOn: updatePoint)
+//            self.translationByHitTest(node: node, basedOn: updatePoint)
             
             gesture.setTranslation(.zero, in: scnView)
 //        case .changed where gesture.numberOfTouches == 2:
@@ -148,8 +161,9 @@ class ViewInteraction: NSObject {
     }
     
     func findNode(point: CGPoint) -> VirtualModelEntity? {
-        let hitTestOptions: [SCNHitTestOption: Any] = [.boundingBoxOnly: true]
+        let hitTestOptions: [SCNHitTestOption: Any] = [.categoryBitMask: CategoryBitMask.categoryToSelect.rawValue]
         let hitTestResults = scnView.hitTest(point, options: hitTestOptions)
+        
         return hitTestResults.lazy.compactMap { result in
             ViewInteraction.existingObjectContainingNode(result.node)
         }.first

@@ -9,7 +9,10 @@
 import UIKit
 import ARKit
 import QuickLook
+import SceneKit
 
+// FIXME: Memory leak issure
+// FIXME: 有時檢查旋轉會反向
 
 class ViewController: UIViewController {
     
@@ -19,7 +22,10 @@ class ViewController: UIViewController {
     var currentEntity: VirtualModelEntity?
 
     @IBOutlet weak var arView: ARGameView!
-    lazy var viewInteraction = ViewInteraction(view: self.arView)
+    lazy var viewInteraction: ViewInteraction = {
+        let view = ViewInteraction(view: self.arView)
+        return view
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addBtn.isHidden = true
@@ -39,7 +45,7 @@ class ViewController: UIViewController {
         
         arView.run()
         viewInteraction.selectedEntity = nil
-
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -51,7 +57,7 @@ class ViewController: UIViewController {
         let menuController = MenuViewController()
         menuController.modalPresentationStyle = .popover
         menuController.preferredContentSize = CGSize(width: UIScreen.main.bounds.width * 2.0 / 3.0,
-                                                     height: UIScreen.main.bounds.width * 2.0 / 3.0)
+                                                     height: 44 * 3)
         menuController.callBack = self
         if let popover = menuController.popoverPresentationController {
             popover.permittedArrowDirections = .up
@@ -69,7 +75,7 @@ class ViewController: UIViewController {
         }
         
         viewInteraction.selectedEntity = currentEntity!
-        currentEntity!.referenceNode.scale = SCNVector3(0.001, 0.001, 0.001)
+//        currentEntity!.referenceNode.scale = SCNVector3(0.001, 0.001, 0.001)
         self.arView.placeModel(currentEntity!)
         self.hideView(uiComponent: self.addBtn)
         self.unhideView(uiComponent: self.clearBtn)
@@ -79,6 +85,23 @@ class ViewController: UIViewController {
         self.arView.clearScene()
         self.hideView(uiComponent: self.clearBtn)
         WebInteraction.clearTemp()
+    }
+    
+    @IBAction func changeTexture(_ sender: Any) {
+        if let node = self.viewInteraction.selectedEntity?.referenceNode.childNode(withName: "mesh_primitive0", recursively: true) {
+            node.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+//            node.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+//            for childNode in node.childNodes {
+//                guard let texture = childNode.geometry?.firstMaterial else {
+//                    continue
+//                }
+//                texture.diffuse.contents = UIColor.red
+//            }
+        }
+    }
+    
+    func search(node: SCNNode) {
+        
     }
     
     func hideOperactedView() {
@@ -123,7 +146,7 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
 
 extension ViewController: MenuViewSelect {
     func selectMenuView(selectString: String) {
-        VirtualModelEntity.loadAsync(name: selectString) { [weak self] virtual in
+        VirtualModelEntityLoader.loadAsync(name: selectString) { [weak self] virtual in
             DispatchQueue.main.async {
                 MenuViewController.ModelPhotoDict[virtual.referenceNode.referenceURL.lastPathComponent] = virtual.photo
                 self?.currentEntity = virtual
@@ -143,7 +166,7 @@ extension ViewController: QLPreviewControllerDelegate, QLPreviewControllerDataSo
     
     func openQuick() {
         WebInteraction.downloadFile(url: URL(string: "https://bamboowand.github.io/retrotv.usdz")!) { fileURL in
-            VirtualModelEntity.loadAsync(url: fileURL) { [weak self] entity in
+            VirtualModelEntityLoader.loadAsync(url: fileURL) { [weak self] entity in
                 self?.arView.placeModel(entity)
                 DispatchQueue.main.async {
                     let quick = QLPreviewController()
