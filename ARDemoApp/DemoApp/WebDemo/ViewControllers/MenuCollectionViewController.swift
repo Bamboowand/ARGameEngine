@@ -26,7 +26,9 @@ class MenuCollectionViewController: UICollectionViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UINib(nibName: "ModelViewCell", bundle: nil), forCellWithReuseIdentifier: "ModelCell")
+        self.collectionView!.register(UINib(nibName: "ModelViewCell",
+                                            bundle: nil),
+                                      forCellWithReuseIdentifier: "ModelCell")
 
         // Do any additional setup after loading the view.
     }
@@ -52,8 +54,10 @@ class MenuCollectionViewController: UICollectionViewController {
         return APIManager.FileNames.count
     }
 
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? ModelViewCell else {
+    override func collectionView(_ collectionView: UICollectionView,
+                                 cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier,
+                                                            for: indexPath) as? ModelViewCell else {
             fatalError("Not found ModelViewCell")
         }
         cell.modelView.image = UIImage(systemName: "circle")!

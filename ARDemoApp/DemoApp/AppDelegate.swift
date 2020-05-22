@@ -5,6 +5,7 @@
 //  Created by ChenWei on 2020/5/14.
 //  Copyright © 2020 Jacob. All rights reserved.
 //
+// swiftlint:disable line_length
 
 import UIKit
 

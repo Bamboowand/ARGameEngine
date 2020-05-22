@@ -5,6 +5,7 @@
 //  Created by ChenWei on 2020/4/13.
 //  Copyright © 2020 Jacob. All rights reserved.
 //
+// swiftlint:disable line_length
 
 import Foundation
 import SceneKit

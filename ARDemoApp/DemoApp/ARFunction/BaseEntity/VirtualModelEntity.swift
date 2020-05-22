@@ -69,13 +69,15 @@ public class VirtualModelEntity: GKEntity, HasModelTrackedRaycast {
     }
 
     deinit {
+        // swiftlint:disable line_length
         print("J_☠️ VirtualModelEntity release id = \(self.identity), model name: \(self.modelName), type: \(self.fileType)")
     }
 }
 
 public class VirtualModelEntityLoader {
     // MARK: - Load model methods
-    static func loadAsync(name: String, in bundle: Bundle? = nil, loadedHandle: @escaping (VirtualModelEntity) -> Void) {
+    static func loadAsync(name: String, in bundle: Bundle? = nil,
+                          loadedHandle: @escaping (VirtualModelEntity) -> Void) {
         var loadUrl: URL
         if let bundle = bundle {
             guard let bundelURL = bundle.url(forResource: name, withExtension: "") else {

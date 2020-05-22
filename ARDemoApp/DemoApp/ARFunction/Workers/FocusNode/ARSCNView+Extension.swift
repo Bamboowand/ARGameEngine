@@ -50,7 +50,8 @@ public extension ARSmartHitTest {
         let results = self.hitTest(point, types: resultTypes)
 
         // 1. Check for a result on an existing plane using geometry.
-        if #available(iOS 13, *), let existingPlaneUsingGeometryResult = results.first(where: { $0.type == .existingPlaneUsingGeometry }),
+        if #available(iOS 13, *),
+            let existingPlaneUsingGeometryResult = results.first(where: { $0.type == .existingPlaneUsingGeometry }),
             let planeAnchor = existingPlaneUsingGeometryResult.anchor as? ARPlaneAnchor,
             alignments.contains(planeAnchor.alignment) {
 

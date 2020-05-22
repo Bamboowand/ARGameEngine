@@ -11,8 +11,7 @@ import ARKit
 import QuickLook
 import SceneKit
 
-// FIXME: Memory leak issure
-// FIXME: 有時檢查旋轉會反向
+// ToDo: Memory leak issure
 
 class ViewController: UIViewController {
 
