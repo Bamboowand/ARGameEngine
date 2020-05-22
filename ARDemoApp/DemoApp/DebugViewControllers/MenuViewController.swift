@@ -13,19 +13,19 @@ protocol MenuViewSelect: class {
 }
 
 class MenuViewController: UITableViewController {
-    
-    static var ModelPhotoDict = [ String : UIImage ]()
-        
+
+    static var ModelPhotoDict = [ String: UIImage ]()
+
     let modelNames = ["桌子.usdz", "椅子.usdz", "電腦椅.usdz"]
-    
-    weak var callBack: MenuViewSelect? = nil
-    
+
+    weak var callBack: MenuViewSelect?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
-    
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -38,15 +38,13 @@ class MenuViewController: UITableViewController {
         return modelNames.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let str = modelNames[indexPath.row].components(separatedBy: ".")
         cell.textLabel?.text = str[0]
         if let photo = MenuViewController.ModelPhotoDict[modelNames[indexPath.row]] {
             cell.imageView!.image = photo
-        }
-        else {
+        } else {
             cell.imageView!.image = UIImage(systemName: "circle")
         }
         cell.backgroundColor = UIColor.white
@@ -54,7 +52,7 @@ class MenuViewController: UITableViewController {
 //        cell.imageView!.image = UIImage(system)
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         callBack?.selectMenuView(selectString: modelNames[indexPath.row])
         self.dismiss(animated: true, completion: nil)

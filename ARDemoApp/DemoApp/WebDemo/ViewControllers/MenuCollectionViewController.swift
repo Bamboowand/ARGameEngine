@@ -16,9 +16,9 @@ protocol MenuCallBack: class {
 
 class MenuCollectionViewController: UICollectionViewController {
     let menuDatas: [VirtualModelEntity] = []
-    
-    weak var callBackDelegate: MenuCallBack? = nil
-    
+
+    weak var callBackDelegate: MenuCallBack?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,7 +26,7 @@ class MenuCollectionViewController: UICollectionViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UINib(nibName: "ModelViewCell", bundle: nil),  forCellWithReuseIdentifier: "ModelCell")
+        self.collectionView!.register(UINib(nibName: "ModelViewCell", bundle: nil), forCellWithReuseIdentifier: "ModelCell")
 
         // Do any additional setup after loading the view.
     }
@@ -44,9 +44,8 @@ class MenuCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        1
     }
-
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
@@ -54,7 +53,9 @@ class MenuCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ModelViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? ModelViewCell else {
+            fatalError("Not found ModelViewCell")
+        }
         cell.modelView.image = UIImage(systemName: "circle")!
         cell.activityView.startAnimating()
         print("Before Cell \(cell.isDownload)")
@@ -73,34 +74,4 @@ class MenuCollectionViewController: UICollectionViewController {
         callBackDelegate?.selectEntity(entity)
         self.dismiss(animated: true, completion: nil)
     }
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-    
 }

@@ -10,7 +10,6 @@ import UIKit
 import ARKit
 import SceneKit
 
-
 class WebDemoViewController: UIViewController {
 
     @IBOutlet weak var arView: ARGameView!
@@ -19,7 +18,7 @@ class WebDemoViewController: UIViewController {
         super.viewDidLoad()
         arView.run()
     }
-    
+
     // MARK: Button action
     @IBAction func showMenuAction(_ sender: UIButton) {
         let layout = UICollectionViewFlowLayout()
@@ -37,19 +36,18 @@ class WebDemoViewController: UIViewController {
         }
         self.present(menu, animated: true, completion: nil)
     }
-    
+
     @IBAction func clearAction(_ sender: Any) {
         do {
             let tempArray = try FileManager.default.contentsOfDirectory(atPath: NSTemporaryDirectory())
             for fileString in tempArray {
-                try! FileManager.default.removeItem(atPath: NSTemporaryDirectory() + fileString)
+                try FileManager.default.removeItem(atPath: NSTemporaryDirectory() + fileString)
             }
-            
-        }
-        catch let error {
+
+        } catch let error {
             print("Error: Fail to read url, \(error.localizedDescription)")
         }
-        
+
         APIManager.ModelDictionary.removeAll()
     }
 }
@@ -63,6 +61,6 @@ extension WebDemoViewController: MenuCallBack {
 
 extension WebDemoViewController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .none
+        .none
     }
 }

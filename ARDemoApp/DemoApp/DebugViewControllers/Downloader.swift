@@ -9,42 +9,46 @@
 import Foundation
 
 class WebInteraction {
-    
+
     class func downloadFile(url: URL, completion: @escaping (URL) -> Void) {
         // File path
 //        let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let tempUrl = URL(fileURLWithPath: NSTemporaryDirectory())
         let destinationUrl = tempUrl.appendingPathComponent(url.lastPathComponent)
-        
+
         // URLSession
         let session = URLSession(configuration: URLSessionConfiguration.default, delegate: nil, delegateQueue: nil)
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        
-        let downloadTask = session.downloadTask(with: request, completionHandler: { (location:URL?, response:URLResponse?, error:Error?) -> Void in
+
+        let downloadTask = session.downloadTask(with: request, completionHandler: {
+            (location: URL?, _, _) -> Void in
             let fileManager = FileManager.default
             if fileManager.fileExists(atPath: destinationUrl.path) {
 //                try! fileManager.removeItem(atPath: destinationUrl.path)
                 completion(destinationUrl)
                 return
             }
-            try! fileManager.moveItem(atPath: location!.path, toPath: destinationUrl.path)
+            do {
+                try fileManager.moveItem(atPath: location!.path, toPath: destinationUrl.path)
+            } catch {
+                fatalError("Error: file moved for \(url.lastPathComponent)")
+            }
             DispatchQueue.main.async {
                 completion(destinationUrl)
             }
         })
         downloadTask.resume()
     }
-    
+
     class func clearTemp() {
         do {
             let tempArray = try FileManager.default.contentsOfDirectory(atPath: NSTemporaryDirectory())
             for fileString in tempArray {
-                try! FileManager.default.removeItem(atPath: NSTemporaryDirectory() + fileString)
+                try FileManager.default.removeItem(atPath: NSTemporaryDirectory() + fileString)
             }
-            
-        }
-        catch let error {
+
+        } catch let error {
             print("Error: Fail to read url, \(error.localizedDescription)")
         }
     }

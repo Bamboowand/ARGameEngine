@@ -10,10 +10,10 @@ import ARKit
 struct TrackedRaycastProperty {
     var allowedAlignment: ARRaycastQuery.TargetAlignment = .any
     var shouldUpdateAnchor: Bool = false
-    var anchor: ARAnchor? = nil
-    var raycastQueue: ARRaycastQuery? = nil
-    var raycast: ARTrackedRaycast? = nil
-    var mostRecentInitialPlacementResult: ARRaycastResult? = nil
+    var anchor: ARAnchor?
+    var raycastQueue: ARRaycastQuery?
+    var raycast: ARTrackedRaycast?
+    var mostRecentInitialPlacementResult: ARRaycastResult?
 }
 
 protocol HasModelTrackedRaycast: AnyObject {
@@ -24,61 +24,60 @@ protocol HasModelTrackedRaycast: AnyObject {
 extension HasModelTrackedRaycast {
     var allowedAlignment: ARRaycastQuery.TargetAlignment {
         get {
-            return trackedRaycastProperty.allowedAlignment
+            trackedRaycastProperty.allowedAlignment
         }
         set {
             trackedRaycastProperty.allowedAlignment = newValue
         }
     }
-    
+
     var shouldUpdateAnchor: Bool {
         get {
-            return trackedRaycastProperty.shouldUpdateAnchor
+            trackedRaycastProperty.shouldUpdateAnchor
         }
         set {
             trackedRaycastProperty.shouldUpdateAnchor = newValue
         }
     }
-    
+
     var anchor: ARAnchor? {
         get {
-            return trackedRaycastProperty.anchor
+            trackedRaycastProperty.anchor
         }
         set {
             trackedRaycastProperty.anchor = newValue
         }
     }
-    
+
     var raycastQueue: ARRaycastQuery? {
         get {
-            return trackedRaycastProperty.raycastQueue
+            trackedRaycastProperty.raycastQueue
         }
         set {
             trackedRaycastProperty.raycastQueue = newValue
         }
     }
-    
+
     var raycast: ARTrackedRaycast? {
         get {
-            return trackedRaycastProperty.raycast
+            trackedRaycastProperty.raycast
         }
         set {
             trackedRaycastProperty.raycast = newValue
         }
     }
-    
+
     var mostRecentInitialPlacementResult: ARRaycastResult? {
         get {
-            return trackedRaycastProperty.mostRecentInitialPlacementResult
+            trackedRaycastProperty.mostRecentInitialPlacementResult
         }
         set {
             trackedRaycastProperty.mostRecentInitialPlacementResult = newValue
         }
     }
-    
+
     func stopTrackedRaycast() {
         raycast?.stopTracking()
         raycast = nil
     }
 }
-

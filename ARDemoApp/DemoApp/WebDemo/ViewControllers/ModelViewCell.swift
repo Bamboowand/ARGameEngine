@@ -11,14 +11,14 @@ import UIKit
 class ModelViewCell: UICollectionViewCell {
     @IBOutlet weak var modelView: UIImageView!
     @IBOutlet weak var activityView: UIActivityIndicatorView!
-    
+
     private(set) var isDownload: Bool = false
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.cornerRadius = 10
     }
-    
+
     func getWebImage(name: String) {
         if let image = APIManager.ModelDictionary[name]?.photo {
             DispatchQueue.main.async { [weak self] in
@@ -28,16 +28,16 @@ class ModelViewCell: UICollectionViewCell {
             }
             return
         }
-        
+
         let download = APIManager.ServerURL.appendingPathComponent(name + ".usdz")
-        
+
         if isDownload {
             return
         }
-        
+
         isDownload = true
         DispatchQueue.global(qos: .utility).async {
-            APIManager.DownloadUSDZFromURL(download) { virtualObject in
+            APIManager.downloadUSDZFromURL(download) { virtualObject in
                 DispatchQueue.main.async { [weak self] in
                     APIManager.ModelDictionary.updateValue(virtualObject, forKey: virtualObject.modelName)
                     self?.modelView.image = virtualObject.photo!

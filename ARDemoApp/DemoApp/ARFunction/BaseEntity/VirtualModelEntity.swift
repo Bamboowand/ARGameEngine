@@ -13,47 +13,47 @@ import SceneKit
 import ModelIO
 
 enum FileType {
-    case USDZ
-    case Dae
-    case Unknow
+    case usdz
+    case dae
+    case unknow
 }
 
 public class VirtualModelEntity: GKEntity, HasModelTrackedRaycast {
     let identity: String = ProcessInfo().globallyUniqueString
-    
+
     var trackedRaycastProperty = TrackedRaycastProperty()
-    
+
     let referenceNode: SCNReferenceNode
     var isLoading: Bool = false
-    var photo: UIImage? = nil
-    
-    var modelName: String  {
-        return referenceNode.referenceURL.lastPathComponent.components(separatedBy: ".").dropLast().last!
+    var photo: UIImage?
+
+    var modelName: String {
+        referenceNode.referenceURL.lastPathComponent.components(separatedBy: ".").dropLast().last!
     }
-    
+
     var fileType: FileType {
         let typeStr = referenceNode.referenceURL.lastPathComponent.components(separatedBy: ".").last
-        var type = FileType.Unknow
+        var type = FileType.unknow
         switch typeStr {
         case "usdz":
-            type = .USDZ
+            type = .usdz
         case "dae":
-            type = .Dae
+            type = .dae
         default:
-            type = .Unknow
+            type = .unknow
         }
         return type
     }
-    
+
     var objectRotation: Float {
         get {
-            return referenceNode.childNodes.first!.eulerAngles.y
+            referenceNode.childNodes.first!.eulerAngles.y
         }
         set (newValue) {
             referenceNode.childNodes.first!.eulerAngles.y = newValue
         }
     }
-    
+
     // MARK: - Init methods
     init(url: URL) {
         guard let reference = SCNReferenceNode(url: url) else {
@@ -63,11 +63,11 @@ public class VirtualModelEntity: GKEntity, HasModelTrackedRaycast {
         super.init()
         self.referenceNode.name = "\(self.identity)"
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     deinit {
         print("J_☠️ VirtualModelEntity release id = \(self.identity), model name: \(self.modelName), type: \(self.fileType)")
     }
@@ -82,8 +82,7 @@ public class VirtualModelEntityLoader {
                 fatalError("Error: Not find Name: \(name)")
             }
             loadUrl = bundelURL
-        }
-        else {
+        } else {
             guard let url = Bundle.main.url(forResource: name, withExtension: "") else {
                 fatalError("Error: Not find Name: \(name)")
             }
@@ -103,15 +102,14 @@ public class VirtualModelEntityLoader {
             entity.referenceNode.enumerateChildNodes { (node, _) in
                 node.categoryBitMask = CategoryBitMask.categoryToSelect.rawValue
             }
-            
+
             let render = SCNRenderer(device: MTLCreateSystemDefaultDevice(), options: nil)
             do {
                 render.scene = try SCNScene(url: entity.referenceNode.referenceURL, options: nil)
                 let renderTime = TimeInterval(0)
                 let photoSize = CGSize(width: 100.0, height: 100.0)
                 entity.photo = render.snapshot(atTime: renderTime, with: photoSize, antialiasingMode: .multisampling4X)
-            }
-            catch {
+            } catch {
                 fatalError("Failed to load SCNScene from \(entity.modelName) referenceURL")
             }
             DispatchQueue.main.async {
@@ -126,9 +124,9 @@ public class VirtualModelEntityLoader {
 
 // MARK: GKEntity methods
 extension VirtualModelEntity {
-    
+
     public override func update(deltaTime seconds: TimeInterval) {
-            
+
     }
-    
+
 }

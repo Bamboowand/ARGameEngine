@@ -66,26 +66,26 @@ public class FocusSquare: FocusNode {
 		-   -
 		s7  s8
 		*/
-		let s1 = Segment(name: "s1", corner: .topLeft, alignment: .horizontal)
-		let s2 = Segment(name: "s2", corner: .topRight, alignment: .horizontal)
-		let s3 = Segment(name: "s3", corner: .topLeft, alignment: .vertical)
-		let s4 = Segment(name: "s4", corner: .topRight, alignment: .vertical)
-		let s5 = Segment(name: "s5", corner: .bottomLeft, alignment: .vertical)
-		let s6 = Segment(name: "s6", corner: .bottomRight, alignment: .vertical)
-		let s7 = Segment(name: "s7", corner: .bottomLeft, alignment: .horizontal)
-		let s8 = Segment(name: "s8", corner: .bottomRight, alignment: .horizontal)
-		segments = [s1, s2, s3, s4, s5, s6, s7, s8]
+		let side1 = Segment(name: "s1", corner: .topLeft, alignment: .horizontal)
+		let side2 = Segment(name: "s2", corner: .topRight, alignment: .horizontal)
+		let side3 = Segment(name: "s3", corner: .topLeft, alignment: .vertical)
+		let side4 = Segment(name: "s4", corner: .topRight, alignment: .vertical)
+		let side5 = Segment(name: "s5", corner: .bottomLeft, alignment: .vertical)
+		let side6 = Segment(name: "s6", corner: .bottomRight, alignment: .vertical)
+		let side7 = Segment(name: "s7", corner: .bottomLeft, alignment: .horizontal)
+		let side8 = Segment(name: "s8", corner: .bottomRight, alignment: .horizontal)
+		segments = [side1, side2, side3, side4, side5, side6, side7, side8]
 
-		let sl: Float = 0.5  // segment length
-		let c: Float = FocusSquare.thickness / 2 // correction to align lines perfectly
-		s1.simdPosition += SIMD3<Float>(-(sl / 2 - c), -(sl - c), 0)
-		s2.simdPosition += SIMD3<Float>(sl / 2 - c, -(sl - c), 0)
-		s3.simdPosition += SIMD3<Float>(-sl, -sl / 2, 0)
-		s4.simdPosition += SIMD3<Float>(sl, -sl / 2, 0)
-		s5.simdPosition += SIMD3<Float>(-sl, sl / 2, 0)
-		s6.simdPosition += SIMD3<Float>(sl, sl / 2, 0)
-		s7.simdPosition += SIMD3<Float>(-(sl / 2 - c), sl - c, 0)
-		s8.simdPosition += SIMD3<Float>(sl / 2 - c, sl - c, 0)
+		let sideLength: Float = 0.5  // segment length
+		let thickness: Float = FocusSquare.thickness / 2 // correction to align lines perfectly
+		side1.simdPosition += SIMD3<Float>(-(sideLength / 2 - thickness), -(sideLength - thickness), 0)
+		side2.simdPosition += SIMD3<Float>(sideLength / 2 - thickness, -(sideLength - thickness), 0)
+		side3.simdPosition += SIMD3<Float>(-sideLength, -sideLength / 2, 0)
+		side4.simdPosition += SIMD3<Float>(sideLength, -sideLength / 2, 0)
+		side5.simdPosition += SIMD3<Float>(-sideLength, sideLength / 2, 0)
+		side6.simdPosition += SIMD3<Float>(sideLength, sideLength / 2, 0)
+		side7.simdPosition += SIMD3<Float>(-(sideLength / 2 - thickness), sideLength - thickness, 0)
+		side8.simdPosition += SIMD3<Float>(sideLength / 2 - thickness, sideLength - thickness, 0)
 
 		for segment in segments {
 			self.positioningNode.addChildNode(segment)

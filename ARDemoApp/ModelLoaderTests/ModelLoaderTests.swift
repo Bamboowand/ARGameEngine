@@ -10,13 +10,13 @@ import XCTest
 @testable import DemoApp
 
 class ModelLoaderTests: XCTestCase {
-    
-    var entity: VirtualModelEntity? = nil
-    
+
+    var entity: VirtualModelEntity?
+
     override func setUp() {
         super.setUp()
     }
-    
+
     override func tearDown() {
         super.tearDown()
         entity = nil
@@ -38,13 +38,13 @@ class ModelLoaderTests: XCTestCase {
             self?.entity = virtual
             XCTAssertNil(self?.entity, "Error: Failed to load model")
         }
-        
-        WebInteraction.downloadFile(url: URL(string: "https://bamboowand.github.io/retrotv.usdz")!) { fileURL in
-            
+
+        WebInteraction.downloadFile(url: URL(string: "https://bamboowand.github.io/retrotv.usdz")!) { _ in
+
         }
-        
+
     }
-    
+
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.

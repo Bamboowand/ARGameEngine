@@ -13,6 +13,6 @@ internal extension float4x4 {
 	Factors out the orientation component of the transform.
 	*/
 	var orientation: simd_quatf {
-		return simd_quaternion(self)
+		simd_quaternion(self)
 	}
 }

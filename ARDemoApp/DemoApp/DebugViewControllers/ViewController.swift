@@ -15,7 +15,7 @@ import SceneKit
 // FIXME: 有時檢查旋轉會反向
 
 class ViewController: UIViewController {
-    
+
     @IBOutlet weak var addBtn: UIButton!
     @IBOutlet weak var clearBtn: UIButton!
     @IBOutlet weak var operactedView: UIView!
@@ -41,13 +41,12 @@ class ViewController: UIViewController {
 //            arView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 //            arView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
 //        ])
-        
-        
+
         arView.run()
         viewInteraction.selectedEntity = nil
-        
+
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         WebInteraction.clearTemp()
@@ -68,28 +67,29 @@ class ViewController: UIViewController {
         }
         self.present(menuController, animated: true, completion: nil)
     }
-        
+
     @IBAction func addObjectAction(_ sender: Any) {
 
         if currentEntity == nil {
             return
         }
-        
+
         viewInteraction.selectedEntity = currentEntity!
 //        currentEntity!.referenceNode.scale = SCNVector3(0.001, 0.001, 0.001)
         self.arView.placeModel(currentEntity!)
         self.hideView(uiComponent: self.addBtn)
         self.unhideView(uiComponent: self.clearBtn)
     }
-    
+
     @IBAction func clearAction(_ sender: Any) {
         self.arView.clearScene()
         self.hideView(uiComponent: self.clearBtn)
         WebInteraction.clearTemp()
     }
-    
+
     @IBAction func changeTexture(_ sender: Any) {
-        if let node = self.viewInteraction.selectedEntity?.referenceNode.childNode(withName: "mesh_primitive0", recursively: true) {
+        if let node = self.viewInteraction.selectedEntity?.referenceNode.childNode(withName: "mesh_primitive0",
+                                                                                   recursively: true) {
             node.geometry?.firstMaterial?.diffuse.contents = UIColor.red
 //            node.geometry?.firstMaterial?.diffuse.contents = UIColor.red
 //            for childNode in node.childNodes {
@@ -100,11 +100,11 @@ class ViewController: UIViewController {
 //            }
         }
     }
-    
+
     @IBAction func takePictureAction(_ sender: Any) {
         self.arView.takePicture()
     }
-    
+
     func hideOperactedView() {
         UIView.animate(withDuration: 0.4, animations: { [unowned self] in
             self.operactedView.alpha = 0.0
@@ -113,14 +113,14 @@ class ViewController: UIViewController {
             self.operactedView.isHidden = true
         })
     }
-    
+
     func unhideOperactedView() {
         UIView.animate(withDuration: 0.4, animations: { [unowned self] in
             self.operactedView.isHidden = false
             self.operactedView.alpha = 1.0
         })
     }
-    
+
     func hideView(uiComponent: UIView) {
         UIView.animate(withDuration: 0.4, animations: {
             uiComponent.alpha = 0.0
@@ -129,19 +129,19 @@ class ViewController: UIViewController {
             uiComponent.isHidden = true
         })
     }
-    
+
     func unhideView(uiComponent: UIView) {
         UIView.animate(withDuration: 0.4, animations: {
             uiComponent.isHidden = false
             uiComponent.alpha = 1.0
         })
     }
-    
+
 }
 
 extension ViewController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .none
+        .none
     }
 }
 
@@ -151,20 +151,20 @@ extension ViewController: MenuViewSelect {
             DispatchQueue.main.async { [weak self] in
                 MenuViewController.ModelPhotoDict[virtual.referenceNode.referenceURL.lastPathComponent] = virtual.photo
                 self?.currentEntity = virtual
-                
+
                 self?.unhideView(uiComponent: self!.addBtn)
-                
-                if ARGameEngine.shared._modelEntitys.count > 0 {
+
+                if ARGameEngine.shared.modelEntitys.count > 0 {
                     self?.unhideView(uiComponent: self!.clearBtn)
                 }
-                
+
             }
         }
     }
 }
 
 extension ViewController: QLPreviewControllerDelegate, QLPreviewControllerDataSource {
-    
+
     func openQuick() {
         WebInteraction.downloadFile(url: URL(string: "https://bamboowand.github.io/retrotv.usdz")!) { fileURL in
             VirtualModelEntityLoader.loadAsync(url: fileURL) { [weak self] entity in
@@ -178,21 +178,21 @@ extension ViewController: QLPreviewControllerDelegate, QLPreviewControllerDataSo
             }
         }
     }
-    
+
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
-        return 1
+        1
     }
-        
+
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
-        let tempArray = try! FileManager.default.contentsOfDirectory(atPath: NSTemporaryDirectory())
-        
-        var url: URL? = nil
-        for fileString in tempArray {
-            url = URL(fileURLWithPath: NSTemporaryDirectory() + fileString)
+        do {
+            let tempArray = try FileManager.default.contentsOfDirectory(atPath: NSTemporaryDirectory())
+            var url: URL?
+            for fileString in tempArray {
+                url = URL(fileURLWithPath: NSTemporaryDirectory() + fileString)
+            }
+            return url! as QLPreviewItem
+        } catch {
+            fatalError("Not found temporary directory")
         }
-        
-        return url! as QLPreviewItem
     }
 }
-
-

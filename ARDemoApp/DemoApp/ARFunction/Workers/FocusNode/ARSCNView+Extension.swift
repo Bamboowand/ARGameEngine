@@ -31,16 +31,14 @@ public extension ARSmartHitTest {
     func smartHitTest(_ point: CGPoint? = nil,
                       infinitePlane: Bool = false,
                       objectPosition: SIMD3<Float>? = nil,
-                      allowedAlignments: [ARPlaneAnchor.Alignment] = []) -> ARHitTestResult?
-    {
+                      allowedAlignments: [ARPlaneAnchor.Alignment] = []) -> ARHitTestResult? {
         var alignments = allowedAlignments
         var resultTypes: ARHitTestResult.ResultType = []
         if alignments.isEmpty {
             if #available(iOS 11.3, *) {
                 alignments = [.horizontal, .vertical]
                 resultTypes = [.existingPlaneUsingGeometry, .estimatedVerticalPlane, .estimatedHorizontalPlane]
-            }
-            else {
+            } else {
                 alignments = [.horizontal]
                 resultTypes = [.estimatedHorizontalPlane]
             }
@@ -75,8 +73,7 @@ public extension ARSmartHitTest {
                 if #available(iOS 11.3, *), planeAnchor.alignment == .vertical {
                     // Return the first vertical plane hit test result.
                     return infinitePlaneResult
-                }
-                else {
+                } else {
                 // For horizontal planes we only want to return a hit test result
                 // if it is close to the current object's position.
                     if let objectY = objectPosition?.y {
@@ -84,8 +81,7 @@ public extension ARSmartHitTest {
                         if objectY > planeY - 0.05 && objectY < planeY + 0.05 {
                             return infinitePlaneResult
                         }
-                    }
-                    else {
+                    } else {
                         return infinitePlaneResult
                     }
                 }
@@ -95,10 +91,9 @@ public extension ARSmartHitTest {
   }
 
   func smartHitTestFallback(allowedAlignments: [ARPlaneAnchor.Alignment],
-                            results: [ARHitTestResult]) -> ARHitTestResult?
-    {
+                            results: [ARHitTestResult]) -> ARHitTestResult? {
         // 3. As a final fallback, check for a result on estimated planes.
-        var vResult: ARHitTestResult? = nil
+        var vResult: ARHitTestResult?
         var containsVertical = false
         if #available(iOS 11.3, *) {
             vResult = results.first(where: { $0.type == .estimatedVerticalPlane })
@@ -115,8 +110,7 @@ public extension ARSmartHitTest {
         case (true, true):
             if hResult != nil && vResult != nil {
                 return hResult!.distance < vResult!.distance ? hResult! : vResult!
-            }
-            else {
+            } else {
                 return hResult ?? vResult
             }
         default:
