@@ -87,19 +87,20 @@ public class ARGameView: ARSCNView {
         _engine.clearScene()
     }
 
-    public func takePicture() {
+    public func takePicture(completion: @escaping (UIImage) -> Void) {
         self._lightView?.isHidden = false
         UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveEaseOut], animations: { [weak self] in
             self?._lightView?.alpha = 1.0
+            AudioServicesPlaySystemSound(1108)
         }, completion: { [weak self] (_: Bool) -> Void in
             self?._lightView?.alpha = 0.0
             self?._lightView?.isHidden = true
+            let photo = self?.snapshot()
+            completion(photo!)
 
         })
         // Play the camera shutter system sound
-        AudioServicesPlaySystemSound(1108)
-        let photo = self.snapshot()
-        UIImageWriteToSavedPhotosAlbum(photo, nil, nil, nil)
+//        UIImageWriteToSavedPhotosAlbum(photo, nil, nil, nil)
     }
 }
 

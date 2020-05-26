@@ -117,7 +117,7 @@ public class VirtualModelEntityLoader {
             DispatchQueue.main.async {
                 loadedHandle(entity)
             }
-            entity.referenceNode.unload()
+//            entity.referenceNode.unload()
             let endTime = CFAbsoluteTimeGetCurrent()
             debugPrint("Virtual model load \(entity.modelName) in \((endTime - startTime) * 1000) millisecond")
         }

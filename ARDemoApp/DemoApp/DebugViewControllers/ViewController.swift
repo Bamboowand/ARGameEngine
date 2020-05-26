@@ -10,6 +10,7 @@ import UIKit
 import ARKit
 import QuickLook
 import SceneKit
+import Social
 
 // ToDo: Memory leak issure
 
@@ -101,7 +102,16 @@ class ViewController: UIViewController {
     }
 
     @IBAction func takePictureAction(_ sender: Any) {
-        self.arView.takePicture()
+        self.arView.takePicture { [weak self] photo in
+//            UIImageWriteToSavedPhotosAlbum(photo, nil, nil, nil)
+            DispatchQueue.main.async {
+                let activityViewController = UIActivityViewController(activityItems: [photo],
+                                                                      applicationActivities: nil)
+                self?.present(activityViewController, animated: true, completion: nil)
+            }
+
+        }
+
     }
 
     func hideOperactedView() {
@@ -138,6 +148,7 @@ class ViewController: UIViewController {
 
 }
 
+// MARK: - Delegate
 extension ViewController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         .none

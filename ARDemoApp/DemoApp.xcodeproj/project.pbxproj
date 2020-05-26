@@ -35,6 +35,7 @@
 		1FD6009F246E7AE600AF0D4B /* ARGameEngine+ARSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD6009E246E7AE600AF0D4B /* ARGameEngine+ARSessionDelegate.swift */; };
 		1FD600A1246E7AF600AF0D4B /* ARGameEngine+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD600A0246E7AF600AF0D4B /* ARGameEngine+ARSCNViewDelegate.swift */; };
 		1FD600A3246E9AE800AF0D4B /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD600A2246E9AE800AF0D4B /* Downloader.swift */; };
+		1FE10A8D247CAEBB00EDE4EB /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE10A8C247CAEBB00EDE4EB /* Social.framework */; };
 		1FF426C224725A00009F1813 /* WebDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF426C124725A00009F1813 /* WebDemoViewController.swift */; };
 		1FF426C624725C00009F1813 /* MenuCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF426C424725C00009F1813 /* MenuCollectionViewController.swift */; };
 		1FF426C724725C00009F1813 /* MenuCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FF426C524725C00009F1813 /* MenuCollectionViewController.xib */; };
@@ -86,6 +87,7 @@
 		1FD6009E246E7AE600AF0D4B /* ARGameEngine+ARSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARGameEngine+ARSessionDelegate.swift"; sourceTree = "<group>"; };
 		1FD600A0246E7AF600AF0D4B /* ARGameEngine+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARGameEngine+ARSCNViewDelegate.swift"; sourceTree = "<group>"; };
 		1FD600A2246E9AE800AF0D4B /* Downloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
+		1FE10A8C247CAEBB00EDE4EB /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		1FF426C124725A00009F1813 /* WebDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebDemoViewController.swift; sourceTree = "<group>"; };
 		1FF426C424725C00009F1813 /* MenuCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewController.swift; sourceTree = "<group>"; };
 		1FF426C524725C00009F1813 /* MenuCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuCollectionViewController.xib; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FE10A8D247CAEBB00EDE4EB /* Social.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +134,7 @@
 				1FD6005F246D96A900AF0D4B /* DemoApp */,
 				1FD60086246DA2A100AF0D4B /* ModelLoaderTests */,
 				1FD6005E246D96A900AF0D4B /* Products */,
+				1FE10A8B247CAEBB00EDE4EB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -245,6 +249,14 @@
 				1FD600A0246E7AF600AF0D4B /* ARGameEngine+ARSCNViewDelegate.swift */,
 			);
 			path = ARGameEngine;
+			sourceTree = "<group>";
+		};
+		1FE10A8B247CAEBB00EDE4EB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1FE10A8C247CAEBB00EDE4EB /* Social.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		1FF426C324725A04009F1813 /* WebDemo */ = {
