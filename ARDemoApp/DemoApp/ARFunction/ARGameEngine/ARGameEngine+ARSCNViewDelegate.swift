@@ -12,6 +12,18 @@ import SceneKit
 extension ARGameEngine: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         self.focusNode.updateFocusNode()
+        let screenCenter = CGPoint(x: UIScreen.main.bounds.width / 2.0, y: UIScreen.main.bounds.height / 2.0)
+        guard let query = view?.raycastQuery(from: screenCenter, allowing: .estimatedPlane, alignment: .any),
+            let result = arSession?.raycast(query).first else {
+            return
+        }
+
+        if let planeAnchor = result.anchor as? ARPlaneAnchor {
+            DispatchQueue.main.async { [weak self] in
+                self?.focusPlaneSize = CGSize(width: CGFloat(planeAnchor.extent.x),
+                                                      height: CGFloat(planeAnchor.extent.z))
+            }
+        }
     }
 
     // MARK: - 

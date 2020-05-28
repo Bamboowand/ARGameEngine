@@ -31,6 +31,9 @@ class ARGameEngine: NSObject {
     private(set) var modelEntitys = [VirtualModelEntity]()
     private let _updateQueue = DispatchQueue(label: "com.argame_engine_j.serial_scenekit_queue")
 
+    private var anchorsOfVisitedPlanes: Set<ARAnchor> = []
+    @objc dynamic public var focusPlaneSize: CGSize = CGSize.zero
+
     // MARK: - Singleton init
     struct Static {
         internal static var instance: ARGameEngine?

@@ -31,6 +31,18 @@ public class VirtualModelEntity: GKEntity, HasModelTrackedRaycast {
         referenceNode.referenceURL.lastPathComponent.components(separatedBy: ".").dropLast().last!
     }
 
+    var modelWidth: Float {
+        let (min, max) = self.referenceNode.boundingBox
+        let modelWidth = max.x - min.x
+        return modelWidth
+    }
+
+    var modelDepth: Float {
+        let (min, max) = self.referenceNode.boundingBox
+        let modelDepth = max.z - min.z
+        return modelDepth
+    }
+
     var fileType: FileType {
         let typeStr = referenceNode.referenceURL.lastPathComponent.components(separatedBy: ".").last
         var type = FileType.unknow
@@ -95,7 +107,7 @@ public class VirtualModelEntityLoader {
 
     static func loadAsync(url: URL, loadedHandle: @escaping (VirtualModelEntity) -> Void) {
         let entity = VirtualModelEntity(url: url)
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .utility).async {
             entity.isLoading = true
             let startTime = CFAbsoluteTimeGetCurrent()
             entity.referenceNode.load()

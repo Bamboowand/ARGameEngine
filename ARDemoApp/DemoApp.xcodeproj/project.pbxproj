@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F61E2FC24753BBB00758930 /* 電腦椅.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 1F61E2F924753BBB00758930 /* 電腦椅.usdz */; };
-		1F61E2FD24753BBB00758930 /* 椅子.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 1F61E2FA24753BBB00758930 /* 椅子.usdz */; };
-		1F61E2FE24753BBB00758930 /* 桌子.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 1F61E2FB24753BBB00758930 /* 桌子.usdz */; };
+		1F2F9A20247E5E23008D7B04 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2F9A1F247E5E23008D7B04 /* MenuViewModel.swift */; };
+		1F2F9A23247E61C9008D7B04 /* Resources.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F2F9A22247E61C9008D7B04 /* Resources.scnassets */; };
+		1F36E734247E534A0006E2A6 /* ModelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F36E732247E534A0006E2A6 /* ModelTableViewCell.xib */; };
+		1F36E735247E534A0006E2A6 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F36E733247E534A0006E2A6 /* MenuViewController.xib */; };
+		1F36E73A247E53660006E2A6 /* ModelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F36E736247E53660006E2A6 /* ModelTableViewCell.swift */; };
+		1F36E73B247E53660006E2A6 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F36E738247E53660006E2A6 /* Downloader.swift */; };
+		1F36E73C247E53660006E2A6 /* LocalLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F36E739247E53660006E2A6 /* LocalLoader.swift */; };
 		1F6A214C246FA53C00AAD6B6 /* float4x4+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A2146246FA53C00AAD6B6 /* float4x4+Extension.swift */; };
 		1F6A214D246FA53C00AAD6B6 /* ARSCNView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A2147246FA53C00AAD6B6 /* ARSCNView+Extension.swift */; };
 		1F6A214E246FA53C00AAD6B6 /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A2148246FA53C00AAD6B6 /* FocusSquare.swift */; };
@@ -25,16 +29,12 @@
 		1FD60075246D973700AF0D4B /* ARGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD60074246D973700AF0D4B /* ARGameView.swift */; };
 		1FD60077246D97D600AF0D4B /* VirtualModelEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD60076246D97D600AF0D4B /* VirtualModelEntity.swift */; };
 		1FD60079246D9A3C00AF0D4B /* HasModelTrackedRaycast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD60078246D9A3C00AF0D4B /* HasModelTrackedRaycast.swift */; };
-		1FD6007E246DA26000AF0D4B /* t_rex.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 1FD6007C246DA26000AF0D4B /* t_rex.usdz */; };
-		1FD6007F246DA26000AF0D4B /* diplodocus.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 1FD6007D246DA26000AF0D4B /* diplodocus.usdz */; };
 		1FD60088246DA2A100AF0D4B /* ModelLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD60087246DA2A100AF0D4B /* ModelLoaderTests.swift */; };
-		1FD60094246E365900AF0D4B /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD60092246E365800AF0D4B /* MenuViewController.swift */; };
-		1FD60095246E365900AF0D4B /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD60093246E365800AF0D4B /* MenuViewController.xib */; };
+		1FD60094246E365900AF0D4B /* MenuViewControllerr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD60092246E365800AF0D4B /* MenuViewControllerr.swift */; };
 		1FD6009A246E6BA200AF0D4B /* ViewInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD60099246E6BA200AF0D4B /* ViewInteraction.swift */; };
 		1FD6009C246E77F100AF0D4B /* ARGameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD6009B246E77F100AF0D4B /* ARGameEngine.swift */; };
 		1FD6009F246E7AE600AF0D4B /* ARGameEngine+ARSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD6009E246E7AE600AF0D4B /* ARGameEngine+ARSessionDelegate.swift */; };
 		1FD600A1246E7AF600AF0D4B /* ARGameEngine+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD600A0246E7AF600AF0D4B /* ARGameEngine+ARSCNViewDelegate.swift */; };
-		1FD600A3246E9AE800AF0D4B /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD600A2246E9AE800AF0D4B /* Downloader.swift */; };
 		1FE10A8D247CAEBB00EDE4EB /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE10A8C247CAEBB00EDE4EB /* Social.framework */; };
 		1FF426C224725A00009F1813 /* WebDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF426C124725A00009F1813 /* WebDemoViewController.swift */; };
 		1FF426C624725C00009F1813 /* MenuCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF426C424725C00009F1813 /* MenuCollectionViewController.swift */; };
@@ -55,9 +55,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1F61E2F924753BBB00758930 /* 電腦椅.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "電腦椅.usdz"; sourceTree = "<group>"; };
-		1F61E2FA24753BBB00758930 /* 椅子.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "椅子.usdz"; sourceTree = "<group>"; };
-		1F61E2FB24753BBB00758930 /* 桌子.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "桌子.usdz"; sourceTree = "<group>"; };
+		1F2F9A1F247E5E23008D7B04 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		1F2F9A22247E61C9008D7B04 /* Resources.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = Resources.scnassets; path = ARFunction/Resources.scnassets; sourceTree = "<group>"; };
+		1F36E732247E534A0006E2A6 /* ModelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModelTableViewCell.xib; sourceTree = "<group>"; };
+		1F36E733247E534A0006E2A6 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		1F36E736247E53660006E2A6 /* ModelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTableViewCell.swift; sourceTree = "<group>"; };
+		1F36E738247E53660006E2A6 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
+		1F36E739247E53660006E2A6 /* LocalLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalLoader.swift; sourceTree = "<group>"; };
 		1F6A2146246FA53C00AAD6B6 /* float4x4+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "float4x4+Extension.swift"; sourceTree = "<group>"; };
 		1F6A2147246FA53C00AAD6B6 /* ARSCNView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ARSCNView+Extension.swift"; sourceTree = "<group>"; };
 		1F6A2148246FA53C00AAD6B6 /* FocusSquare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
@@ -75,18 +79,14 @@
 		1FD60074246D973700AF0D4B /* ARGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARGameView.swift; sourceTree = "<group>"; };
 		1FD60076246D97D600AF0D4B /* VirtualModelEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualModelEntity.swift; sourceTree = "<group>"; };
 		1FD60078246D9A3C00AF0D4B /* HasModelTrackedRaycast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasModelTrackedRaycast.swift; sourceTree = "<group>"; };
-		1FD6007C246DA26000AF0D4B /* t_rex.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = t_rex.usdz; sourceTree = "<group>"; };
-		1FD6007D246DA26000AF0D4B /* diplodocus.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = diplodocus.usdz; sourceTree = "<group>"; };
 		1FD60085246DA2A100AF0D4B /* ModelLoaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModelLoaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FD60087246DA2A100AF0D4B /* ModelLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLoaderTests.swift; sourceTree = "<group>"; };
 		1FD60089246DA2A100AF0D4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1FD60092246E365800AF0D4B /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		1FD60093246E365800AF0D4B /* MenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		1FD60092246E365800AF0D4B /* MenuViewControllerr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewControllerr.swift; sourceTree = "<group>"; };
 		1FD60099246E6BA200AF0D4B /* ViewInteraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewInteraction.swift; sourceTree = "<group>"; };
 		1FD6009B246E77F100AF0D4B /* ARGameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARGameEngine.swift; sourceTree = "<group>"; };
 		1FD6009E246E7AE600AF0D4B /* ARGameEngine+ARSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARGameEngine+ARSessionDelegate.swift"; sourceTree = "<group>"; };
 		1FD600A0246E7AF600AF0D4B /* ARGameEngine+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARGameEngine+ARSCNViewDelegate.swift"; sourceTree = "<group>"; };
-		1FD600A2246E9AE800AF0D4B /* Downloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		1FE10A8C247CAEBB00EDE4EB /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		1FF426C124725A00009F1813 /* WebDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebDemoViewController.swift; sourceTree = "<group>"; };
 		1FF426C424725C00009F1813 /* MenuCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +115,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F2F9A21247E5E6C008D7B04 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				1F2F9A1F247E5E23008D7B04 /* MenuViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		1F2F9A24247E65D6008D7B04 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1FD60064246D96A900AF0D4B /* ViewController.swift */,
+				1FD60092246E365800AF0D4B /* MenuViewControllerr.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1F36E731247E534A0006E2A6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1F36E736247E53660006E2A6 /* ModelTableViewCell.swift */,
+				1F36E732247E534A0006E2A6 /* ModelTableViewCell.xib */,
+				1F36E733247E534A0006E2A6 /* MenuViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1F36E737247E53660006E2A6 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				1F36E738247E53660006E2A6 /* Downloader.swift */,
+				1F36E739247E53660006E2A6 /* LocalLoader.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
 		1F6A2145246FA53C00AAD6B6 /* FocusNode */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,7 +191,7 @@
 				1FF426C324725A04009F1813 /* WebDemo */,
 				1FD60091246E361300AF0D4B /* DebugViewControllers */,
 				1FD6008F246E355F00AF0D4B /* ARFunction */,
-				1FD60080246DA26D00AF0D4B /* Resources */,
+				1F2F9A22247E61C9008D7B04 /* Resources.scnassets */,
 				1FD60090246E358300AF0D4B /* Others */,
 				1FD6006E246D96AB00AF0D4B /* Info.plist */,
 			);
@@ -177,18 +213,6 @@
 				1FD6007A246D9B4200AF0D4B /* Composer */,
 			);
 			path = BaseEntity;
-			sourceTree = "<group>";
-		};
-		1FD60080246DA26D00AF0D4B /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				1F61E2FB24753BBB00758930 /* 桌子.usdz */,
-				1F61E2FA24753BBB00758930 /* 椅子.usdz */,
-				1F61E2F924753BBB00758930 /* 電腦椅.usdz */,
-				1FD6007D246DA26000AF0D4B /* diplodocus.usdz */,
-				1FD6007C246DA26000AF0D4B /* t_rex.usdz */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		1FD60086246DA2A100AF0D4B /* ModelLoaderTests */ = {
@@ -224,10 +248,10 @@
 		1FD60091246E361300AF0D4B /* DebugViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1FD60064246D96A900AF0D4B /* ViewController.swift */,
-				1FD600A2246E9AE800AF0D4B /* Downloader.swift */,
-				1FD60092246E365800AF0D4B /* MenuViewController.swift */,
-				1FD60093246E365800AF0D4B /* MenuViewController.xib */,
+				1F2F9A24247E65D6008D7B04 /* ViewControllers */,
+				1F2F9A21247E5E6C008D7B04 /* ViewModels */,
+				1F36E737247E53660006E2A6 /* Workers */,
+				1F36E731247E534A0006E2A6 /* Views */,
 			);
 			path = DebugViewControllers;
 			sourceTree = "<group>";
@@ -370,17 +394,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F61E2FC24753BBB00758930 /* 電腦椅.usdz in Resources */,
-				1FD6007E246DA26000AF0D4B /* t_rex.usdz in Resources */,
-				1F61E2FD24753BBB00758930 /* 椅子.usdz in Resources */,
-				1FD60095246E365900AF0D4B /* MenuViewController.xib in Resources */,
+				1F36E735247E534A0006E2A6 /* MenuViewController.xib in Resources */,
+				1F36E734247E534A0006E2A6 /* ModelTableViewCell.xib in Resources */,
+				1F2F9A23247E61C9008D7B04 /* Resources.scnassets in Resources */,
 				1FF426C724725C00009F1813 /* MenuCollectionViewController.xib in Resources */,
 				1FD6006D246D96AB00AF0D4B /* LaunchScreen.storyboard in Resources */,
-				1F61E2FE24753BBB00758930 /* 桌子.usdz in Resources */,
 				1FD6006A246D96AB00AF0D4B /* Assets.xcassets in Resources */,
 				1FD60068246D96A900AF0D4B /* Main.storyboard in Resources */,
 				1FF426CE24725E97009F1813 /* ModelViewCell.xib in Resources */,
-				1FD6007F246DA26000AF0D4B /* diplodocus.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,11 +441,14 @@
 			files = (
 				1FD60065246D96A900AF0D4B /* ViewController.swift in Sources */,
 				1FD60061246D96A900AF0D4B /* AppDelegate.swift in Sources */,
-				1FD600A3246E9AE800AF0D4B /* Downloader.swift in Sources */,
+				1F36E73C247E53660006E2A6 /* LocalLoader.swift in Sources */,
+				1F2F9A20247E5E23008D7B04 /* MenuViewModel.swift in Sources */,
+				1F36E73B247E53660006E2A6 /* Downloader.swift in Sources */,
 				1F6A214F246FA53C00AAD6B6 /* FocusSquare+Segment.swift in Sources */,
 				1F6A2151246FA53C00AAD6B6 /* FocusNode.swift in Sources */,
 				1FD6009C246E77F100AF0D4B /* ARGameEngine.swift in Sources */,
 				1FF426CA24725DA2009F1813 /* APIManager.swift in Sources */,
+				1F36E73A247E53660006E2A6 /* ModelTableViewCell.swift in Sources */,
 				1F6A2150246FA53C00AAD6B6 /* FocusPlane.swift in Sources */,
 				1F6A214E246FA53C00AAD6B6 /* FocusSquare.swift in Sources */,
 				1FD6009F246E7AE600AF0D4B /* ARGameEngine+ARSessionDelegate.swift in Sources */,
@@ -433,7 +457,7 @@
 				1FD60063246D96A900AF0D4B /* SceneDelegate.swift in Sources */,
 				1FD600A1246E7AF600AF0D4B /* ARGameEngine+ARSCNViewDelegate.swift in Sources */,
 				1FD6009A246E6BA200AF0D4B /* ViewInteraction.swift in Sources */,
-				1FD60094246E365900AF0D4B /* MenuViewController.swift in Sources */,
+				1FD60094246E365900AF0D4B /* MenuViewControllerr.swift in Sources */,
 				1FD60079246D9A3C00AF0D4B /* HasModelTrackedRaycast.swift in Sources */,
 				1FD60075246D973700AF0D4B /* ARGameView.swift in Sources */,
 				1FD60077246D97D600AF0D4B /* VirtualModelEntity.swift in Sources */,
