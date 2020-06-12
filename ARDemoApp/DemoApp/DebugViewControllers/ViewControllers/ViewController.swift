@@ -105,7 +105,7 @@ class ViewController: UIViewController {
 
     @IBAction func takePictureAction(_ sender: Any) {
         self.arView.takePicture { [weak self] photo in
-//            UIImageWriteToSavedPhotosAlbum(photo, nil, nil, nil)
+            UIImageWriteToSavedPhotosAlbum(photo, nil, nil, nil)
             DispatchQueue.main.async {
                 let activityViewController = UIActivityViewController(activityItems: [photo],
                                                                       applicationActivities: nil)

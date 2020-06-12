@@ -33,11 +33,11 @@ extension ARGameEngine: ARSCNViewDelegate {
 
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
 
-//        DispatchQueue.main.async {
+        DispatchQueue.main.async {
 //            if let planeAnchor = anchor as? ARPlaneAnchor {
 //                let plane = ARSCNPlaneGeometry(device: MTLCreateSystemDefaultDevice()!)
 //                plane?.update(from: planeAnchor.geometry)
-////                plane?.firstMaterial?.colorBufferWriteMask = .alpha
+//////                plane?.firstMaterial?.colorBufferWriteMask = .alpha
 //                plane?.firstMaterial?.diffuse.contents = UIColor.red.withAlphaComponent(0.7)
 //                node.geometry = plane
 //                node.name = "Occlusion Plane"
@@ -56,7 +56,7 @@ extension ARGameEngine: ARSCNViewDelegate {
 //                }
 
 //            }
-//        }
+        }
 
     }
 

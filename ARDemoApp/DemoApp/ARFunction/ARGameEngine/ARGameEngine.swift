@@ -25,7 +25,11 @@ class ARGameEngine: NSObject {
             self.scene?.rootNode.addChildNode(self.focusNode)
         }
     }
-    weak var scene: SCNScene?
+    weak var scene: SCNScene? {
+        didSet {
+            setupScene()
+        }
+    }
     weak var arSession: ARSession?
     // MARK: - Property storge
     private(set) var modelEntitys = [VirtualModelEntity]()
@@ -60,8 +64,13 @@ class ARGameEngine: NSObject {
         print("J_☠️ ARGameEngine release")
     }
 
+    func setupScene() {
+        addShadowLight()
+    }
+
     // MARK: - Model Data Operation
     private func addModel(_ newModel: VirtualModelEntity) {
+        addShadowPlaneTo(node: newModel.referenceNode)
         modelEntitys.append(newModel)
     }
 
@@ -170,4 +179,36 @@ class ARGameEngine: NSObject {
         }
     }
 
+}
+
+// MARK: - Create Default Game Model
+extension ARGameEngine {
+    private func addShadowLight() {
+        let directionLight = SCNLight()
+        directionLight.type = .directional
+        directionLight.intensity = 0.0
+        // Cast Shadow methods
+        directionLight.castsShadow = true
+        directionLight.shadowMode = .deferred
+
+        directionLight.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5)
+
+        // Increase its shadowSampleCount to create smoother and higher resolution shadows.
+        directionLight.shadowSampleCount = 10
+
+        let directionLightNode = SCNNode()
+        directionLightNode.name = "Shadow Light"
+        directionLightNode.light = directionLight
+        directionLightNode.rotation = SCNVector4(1.0, 0, 0, -Float.pi / 3.0)
+        scene?.rootNode.addChildNode(directionLightNode)
+    }
+
+    private func addShadowPlaneTo(node: SCNNode) {
+        let plane = SCNPlane(width: 2.0, height: 2.0)
+        plane.firstMaterial?.colorBufferWriteMask = .init(rawValue: 0)
+//        plane.firstMaterial?.diffuse.contents = UIColor.blue
+        let planeNode = SCNNode(geometry: plane)
+        planeNode.rotation = SCNVector4(1.0, 0.0, 0.0, -Float.pi / 2.0)
+        node.addChildNode(planeNode)
+    }
 }
